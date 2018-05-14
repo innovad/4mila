@@ -2,15 +2,18 @@ package com._4mila.backend.model.control;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com._4mila.backend.model.AbstractEntity;
 import com._4mila.backend.model.event.Event;
 
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "event_key", "id" }) })
 public class Control extends AbstractEntity implements Comparable<Control> {
 
 	private String id;
-	
+
 	@ManyToOne
 	private Event event;
 
@@ -21,11 +24,11 @@ public class Control extends AbstractEntity implements Comparable<Control> {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public Event getEvent() {
 		return event;
 	}
-	
+
 	public void setEvent(Event event) {
 		this.event = event;
 	}

@@ -53,6 +53,18 @@ export class GuiModel {
                             "width": 2
                         },
                         {
+                            "id":   "event",
+                            "type": "autocomplete",
+                            "name": "Event",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "eventKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "EventForm",
+                            "url": "/event",
+                            "width": 2
+                        },
+                        {
                             "type": "deleteButton",
                             "name": "Delete"
                         },
@@ -179,7 +191,7 @@ export class GuiModel {
                             "type": "newButton",
                             "name": "NewControl",
                             "width": 2,
-                            "icon": "fa-calendar",
+                            "icon": "fa-map-pin",
                             "color": "green",
                             "form": {
                                 "form": "ControlForm"
