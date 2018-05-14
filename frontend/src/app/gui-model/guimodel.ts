@@ -95,10 +95,53 @@ export class GuiModel {
                             "color": "belize hole",
                             "search": false,
                             "url": "/event",
-                            "form": {
-                                "form": "EventForm",
-                            }
+                            "page": "eventpage"
                         }
+                    ]
+                },
+                {
+                    "id": "eventpage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "EditEvent",
+                            "width": 2,
+                            "icon": "fa-calendar",
+                            "color": "green",
+                            "form": {
+                                "form": "EventForm"
+                            }
+                        },
+                        {
+                            "type": "button",
+                            "name": "Courses",
+                            "icon": "fa-map",
+                            "color": "carrot",
+                            "page": "entriespage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Classes",
+                            "icon": "fa-users",
+                            "color": "carrot",
+                            "page": "entriespage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Controls",
+                            "icon": "fa-map-pin",
+                            "color": "carrot",
+                            "page": "entriespage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
                     ]
                 },
             ]
