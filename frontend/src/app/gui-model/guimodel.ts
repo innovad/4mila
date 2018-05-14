@@ -202,7 +202,7 @@ export class GuiModel {
                             "icon": "fa-map-pin",
                             "color": "belize hole",
                             "search": false,
-                            "url": "/control",
+                            "url": "/event/:eventKey/control",
                             "form": {
                                 "form": "ControlForm"
                             }
