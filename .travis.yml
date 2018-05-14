@@ -4,7 +4,7 @@ jdk:
   - oraclejdk8
   
 before_install:
-- chmod +x gradlew  
+- chmod +x backend/gradlew  
 
 script:
-- ./gradlew check --project-dir 4mila/backend
+- ./gradlew check --project-dir backend
