@@ -1,0 +1,54 @@
+{
+  "name": "4mila",
+  "version": "0.0.1",
+  "homepage": "https://github.com/innovad/4mila/",
+  "bugs": {
+    "url": "https://github.com/innovad/4mila/issues"
+  },
+  "license": "ISC",
+  "private": true,
+  "author": {
+    "name": "Adrian Moser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innovad/4mila.git"
+  },
+  "engines": {
+    "node": "8.8.1",
+    "npm": "5.4.2"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build"
+  },
+  "dependencies": {
+    "path-framework": "0.2.20"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.6.5",
+    "@angular/compiler-cli": "4.2.5",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "6.0.60",
+    "codelyzer": "2.0.0",
+    "concurrently": "2.2.0",
+    "jasmine-core": "2.5.2",
+    "jasmine-spec-reporter": "3.2.0",
+    "karma": "1.4.1",
+    "karma-chrome-launcher": "2.0.0",
+    "karma-cli": "1.0.1",
+    "karma-jasmine": "1.1.0",
+    "karma-jasmine-html-reporter": "0.2.2",
+    "karma-coverage-istanbul-reporter": "0.2.0",
+    "nodemon": "1.11.0",
+    "protractor": "5.1.0",
+    "ts-node": "2.0.0",
+    "tslint": "4.4.2",
+    "typescript": "2.1.5"
+  }
+}

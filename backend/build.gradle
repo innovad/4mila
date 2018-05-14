@@ -1,0 +1,71 @@
+plugins {
+	id 'java'
+	id "at.comm_unity.gradle.plugins.jpamodelgen" version "1.1.1"
+	id 'application'
+}
+
+group = 'com._4mila.backend'
+version = '0.2'
+mainClassName = 'com._4mila.backend.Main'
+compileJava.options.compilerArgs += ["-proc:none"]
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+}
+
+task stage {
+  dependsOn build
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources", "frontend"
+        }
+    }
+}
+
+jar {
+  archiveName = '4mila-all.jar'
+  manifest {
+    attributes 'Main-Class': 'com._4mila.backend.Main'
+  }
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+
+jpaModelgen {
+  library = "org.hibernate:hibernate-jpamodelgen:5.2.2.Final"
+  jpaModelgenSourcesDir = "src/main/java"
+}
+
+dependencies {
+	compile 'org.slf4j:slf4j-simple:1.7.21'
+	compile 'org.slf4j:slf4j-log4j12:1.7.21'
+    compile 'org.hibernate:hibernate-core:5.2.2.Final'
+	compile 'org.hibernate:hibernate-jpamodelgen:5.2.2.Final'
+	compile 'org.hibernate:hibernate-c3p0:5.2.2.Final'
+	compile 'com.sparkjava:spark-core:2.5'
+	compile 'com.google.code.gson:gson:2.7'
+	compile 'com.h2database:h2:1.4.192'
+	compile 'org.postgresql:postgresql:9.4.1211'
+	compile 'com.google.inject:guice:4.1.0'
+	compile 'com.google.inject.extensions:guice-persist:4.1.0'
+	compile 'io.jsonwebtoken:jjwt:0.6.0'
+	compile 'com.google.guava:guava:20.0'
+	
+	compile 'com.thoughtworks.xstream:xstream:1.4.10'
+	compile 'org.quartz-scheduler:quartz:2.3.0'
+	compile 'org.postgresql:postgresql:42.1.4'
+    
+    testCompile 'junit:junit:4.12'
+}
+
+configurations.all {
+       exclude group: 'org.slf4j', module: 'slf4j-simple'
+}
