@@ -1,1 +1,1 @@
-script: ./gradlew check --project-dir backend
+script: ./gradlew check --project-dir 4mila/backend
