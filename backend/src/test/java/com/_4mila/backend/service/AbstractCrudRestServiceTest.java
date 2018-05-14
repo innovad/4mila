@@ -2,7 +2,6 @@ package com._4mila.backend.service;
 
 import static org.junit.Assert.assertEquals;
 import static spark.Spark.port;
-import static spark.Spark.stop;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,6 +23,8 @@ import com._4mila.backend.model.AbstractEntity;
 import com._4mila.backend.server.json.JsonHelper;
 import com.google.common.io.CharStreams;
 import com.google.gson.reflect.TypeToken;
+
+import spark.Spark;
 
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
 
@@ -54,7 +55,19 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 	
 	@After
 	public void after() {
-		stop();
+		try {
+            Spark.stop();
+            while (true) {
+                try {
+                    Spark.port();
+                    Thread.sleep(500);
+                } catch (final IllegalStateException ignored) {
+                    break;
+                }
+            }
+        } catch (final Exception ex) {
+            // Ignore
+        }		
 	}
 
 	@Test

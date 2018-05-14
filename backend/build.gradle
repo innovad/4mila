@@ -50,7 +50,7 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.2.Final'
 	compile 'org.hibernate:hibernate-jpamodelgen:5.2.2.Final'
 	compile 'org.hibernate:hibernate-c3p0:5.2.2.Final'
-	compile 'com.sparkjava:spark-core:2.5'
+	compile 'com.sparkjava:spark-core:2.7.2'
 	compile 'com.google.code.gson:gson:2.7'
 	compile 'com.h2database:h2:1.4.192'
 	compile 'org.postgresql:postgresql:9.4.1211'
