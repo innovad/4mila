@@ -1,7 +1,9 @@
 package com._4mila.backend.service;
 
 import static org.junit.Assert.assertEquals;
+import static spark.Spark.awaitInitialization;
 import static spark.Spark.port;
+import static spark.Spark.stop;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,15 +53,16 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 
 		service = (AbstractCrudRestService<E, KEYTYPE>) getInjector().getInstance(getService());
 		service.init();
+		awaitInitialization();
 	}
 	
 	@After
 	public void after() {
 		try {
-            Spark.stop();
+            stop();
             while (true) {
                 try {
-                    Spark.port();
+                    port();
                     Thread.sleep(500);
                 } catch (final IllegalStateException ignored) {
                     break;
