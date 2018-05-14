@@ -26,7 +26,6 @@ import com._4mila.backend.server.json.JsonHelper;
 import com.google.common.io.CharStreams;
 import com.google.gson.reflect.TypeToken;
 
-import spark.Spark;
 
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
 
