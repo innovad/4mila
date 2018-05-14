@@ -29,6 +29,11 @@ sourceSets {
     }
 }
 
+test {
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+}
+
 jar {
   archiveName = '4mila-all.jar'
   manifest {
