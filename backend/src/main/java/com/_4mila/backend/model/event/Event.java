@@ -24,6 +24,10 @@ public class Event extends AbstractEntity implements Comparable<Event> {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Set<Control> getControls() {
+		return controls;
+	}
 
 	@Override
 	public int compareTo(Event o) {

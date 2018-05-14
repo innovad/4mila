@@ -21,6 +21,14 @@ public class Control extends AbstractEntity implements Comparable<Control> {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public Event getEvent() {
+		return event;
+	}
+	
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 
 	@Override
 	public int compareTo(Control o) {
