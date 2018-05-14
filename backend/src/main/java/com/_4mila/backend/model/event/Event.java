@@ -1,17 +1,21 @@
 package com._4mila.backend.model.event;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import com._4mila.backend.model.AbstractEntity;
+import com._4mila.backend.model.control.Control;
 
 @Entity
 public class Event extends AbstractEntity implements Comparable<Event> {
 
 	private String name;
-	private String city;
-	private String email;
-	private String phone;
-	private String url;
+
+	@OneToMany (mappedBy = "event")
+	private Set<Control> controls = new HashSet<>();
 
 	public String getName() {
 		return name;
@@ -19,38 +23,6 @@ public class Event extends AbstractEntity implements Comparable<Event> {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	@Override

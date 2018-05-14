@@ -21,7 +21,6 @@ public class EventDatabaseService extends AbstractCrudDatabaseService<Event, Lon
 	public void createPathListEntry(Event entity, PathListEntry<Long> entry) {
 		entry.setKey(entity.getKey(), getKeyName());
 		entry.setName(entity.getName());
-		entry.getDetails().add(entity.getCity());
 	}
 
 	@Override
