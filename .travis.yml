@@ -1,1 +1,10 @@
-script: ./gradlew check --project-dir 4mila/backend
+language: java
+
+jdk:
+  - oraclejdk8
+  
+before_install:
+- chmod +x gradlew  
+
+script:
+- ./gradlew check --project-dir 4mila/backend
