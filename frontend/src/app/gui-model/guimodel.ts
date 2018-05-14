@@ -40,6 +40,32 @@ export class GuiModel {
                         }
                     ]
                 },
+                {
+                    "id": "ControlForm",
+                    "title": "Control",
+                    "url": "/control",
+                    "formFieldList": [
+                        {
+                            "id": "id",
+                            "type": "text",
+                            "name": "Number",
+                            "required": true,
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
             ],
             "pageList": [
                 {
@@ -138,10 +164,37 @@ export class GuiModel {
                             "name": "Controls",
                             "icon": "fa-map-pin",
                             "color": "carrot",
-                            "page": "entriespage",
-                            "tooltip": "NotYetImplemented",
+                            "page": "controlspage",
                             "width": 2,
                         },
+                    ]
+                },
+                {
+                    "id": "controlspage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewControl",
+                            "width": 2,
+                            "icon": "fa-calendar",
+                            "color": "green",
+                            "form": {
+                                "form": "ControlForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-map-pin",
+                            "color": "belize hole",
+                            "search": false,
+                            "url": "/control",
+                            "form": {
+                                "form": "ControlForm"
+                            }
+                        }
                     ]
                 },
             ]

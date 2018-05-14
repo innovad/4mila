@@ -24,6 +24,7 @@ export class _4milaTranslationService extends TranslationService {
         // TODO: switch on language if (languageCode == "de")
         return {
             "Admin": "Admin",
+            "Control": "Control",
             "Controls": "Controls",
             "Courses": "Courses",
             "Classes": "Classes",
@@ -32,7 +33,9 @@ export class _4milaTranslationService extends TranslationService {
             "Event": "Event",
             "Name": "Name",
             "NewEvent": "New Event",
+            "NewControl": "New Control",
             "NotYetImplemented": "This function is not yet implemented.",
+            "Number": "Number",
             "Results": "Results",
         }
     }
