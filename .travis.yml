@@ -7,4 +7,4 @@ before_install:
 - chmod +x backend/gradlew  
 
 script:
-- ./backend/gradlew check
+- ./backend/gradlew test
