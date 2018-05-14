@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import com._4mila.backend.server.CorsHeaders;
 import com._4mila.backend.server.Database;
 import com._4mila.backend.server.EnvironmentUtility;
+import com._4mila.backend.service.control.ControlRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
 import com._4mila.backend.service.language.LanguageUtility;
@@ -74,6 +75,7 @@ public class Main {
 		// Services
 		injector.getInstance(UserRestService.class).init();
 		injector.getInstance(EventRestService.class).init();
+		injector.getInstance(ControlRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();
