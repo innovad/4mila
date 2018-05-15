@@ -26,7 +26,6 @@ import com._4mila.backend.server.json.JsonHelper;
 import com.google.common.io.CharStreams;
 import com.google.gson.reflect.TypeToken;
 
-
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
 
 	private AbstractCrudRestService<E, KEYTYPE> service;
@@ -36,7 +35,7 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 	protected abstract Class<?> getService();
 
 	protected abstract Class<E> getEntityClass();
-	
+
 	protected void beforeCreate(E entity) {
 	}
 
@@ -54,22 +53,22 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		service.init();
 		awaitInitialization();
 	}
-	
+
 	@After
 	public void after() {
 		try {
-            stop();
-            while (true) {
-                try {
-                    port();
-                    Thread.sleep(500);
-                } catch (final IllegalStateException ignored) {
-                    break;
-                }
-            }
-        } catch (final Exception ex) {
-            // Ignore
-        }		
+			stop();
+			while (true) {
+				try {
+					port();
+					Thread.sleep(500);
+				} catch (final IllegalStateException ignored) {
+					break;
+				}
+			}
+		} catch (final Exception ex) {
+			// Ignore
+		}
 	}
 
 	@Test
@@ -81,18 +80,17 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		beforeCreate(entity);
 		svc.create(entity);
 
-		String jsonResult = testGet();
+		String jsonResult = testGet(getEntityClass().getSimpleName().toLowerCase());
 
-		TypeToken<ArrayList<PathListEntry<Long>>> token = new TypeToken<ArrayList<PathListEntry<Long>>>() {};
-		List<PathListEntry<Long>> result = getInjector().getInstance(JsonHelper.class).getGson().fromJson(jsonResult, token.getType());
+		List<PathListEntry<Long>> result = parsePathListJson(jsonResult);
 		assertEquals(1, result.size());
 
 		svc.delete(entity);
 	}
 
-	private String testGet() throws IOException, ClientProtocolException {
+	protected String testGet(String serviceName) throws IOException, ClientProtocolException {
 		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpGet getRequest = new HttpGet("http://localhost:" + port + "/services/" + getEntityClass().getSimpleName().toLowerCase());
+		HttpGet getRequest = new HttpGet("http://localhost:" + port + "/services/" + serviceName);
 		HttpResponse getResponse = httpClient.execute(getRequest);
 		HttpEntity getResponseEntity = getResponse.getEntity();
 		Reader reader = new InputStreamReader(getResponseEntity.getContent());
@@ -100,5 +98,12 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		String jsonResult = CharStreams.toString(reader);
 		return jsonResult;
 	}
-	
+
+	protected List<PathListEntry<Long>> parsePathListJson(String jsonResult) {
+		TypeToken<ArrayList<PathListEntry<Long>>> token = new TypeToken<ArrayList<PathListEntry<Long>>>() {
+		};
+		List<PathListEntry<Long>> result = getInjector().getInstance(JsonHelper.class).getGson().fromJson(jsonResult, token.getType());
+		return result;
+	}
+
 }
