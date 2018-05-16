@@ -172,10 +172,12 @@ export class GuiModel {
                             "width": 2,
                         },
                         {
-                            "type": "button",
+                            "type": "list",
                             "name": "Controls",
                             "icon": "fa-map-pin",
                             "color": "carrot",
+                            "search": false,
+                            "url": "/event/:eventKey/control/summary",
                             "page": "controlspage",
                             "width": 2,
                         },
