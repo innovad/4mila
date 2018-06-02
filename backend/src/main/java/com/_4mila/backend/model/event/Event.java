@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 
 import com._4mila.backend.model.AbstractEntity;
 import com._4mila.backend.model.control.Control;
+import com._4mila.backend.model.course.Course;
 
 @Entity
 public class Event extends AbstractEntity implements Comparable<Event> {
@@ -17,6 +18,9 @@ public class Event extends AbstractEntity implements Comparable<Event> {
 	@OneToMany (mappedBy = "event")
 	private Set<Control> controls = new HashSet<>();
 
+	@OneToMany (mappedBy = "event")
+	private Set<Course> courses = new HashSet<>();
+	
 	public String getName() {
 		return name;
 	}
@@ -27,6 +31,10 @@ public class Event extends AbstractEntity implements Comparable<Event> {
 	
 	public Set<Control> getControls() {
 		return controls;
+	}
+	
+	public Set<Course> getCourses() {
+		return courses;
 	}
 
 	@Override

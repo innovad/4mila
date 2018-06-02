@@ -78,6 +78,44 @@ export class GuiModel {
                         }
                     ]
                 },
+                {
+                    "id": "CourseForm",
+                    "title": "Course",
+                    "url": "/course",
+                    "formFieldList": [
+                        {
+                            "id": "name",
+                            "type": "text",
+                            "name": "Name",
+                            "required": true,
+                            "width": 2
+                        },
+                        {
+                            "id":   "event",
+                            "type": "autocomplete",
+                            "name": "Event",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "eventKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "EventForm",
+                            "url": "/event",
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
             ],
             "pageList": [
                 {
@@ -154,12 +192,13 @@ export class GuiModel {
                             }
                         },
                         {
-                            "type": "button",
+                            "type": "list",
                             "name": "Courses",
                             "icon": "fa-map",
                             "color": "carrot",
-                            "page": "entriespage",
-                            "tooltip": "NotYetImplemented",
+                            "search": false,
+                            "url": "/event/:eventKey/course/summary",
+                            "page": "coursespage",
                             "width": 2,
                         },
                         {
@@ -207,6 +246,34 @@ export class GuiModel {
                             "url": "/event/:eventKey/control",
                             "form": {
                                 "form": "ControlForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "coursespage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewCourse",
+                            "width": 2,
+                            "icon": "fa-map",
+                            "color": "green",
+                            "form": {
+                                "form": "CourseForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-map",
+                            "color": "belize hole",
+                            "search": false,
+                            "url": "/event/:eventKey/course",
+                            "form": {
+                                "form": "CourseForm"
                             }
                         }
                     ]
