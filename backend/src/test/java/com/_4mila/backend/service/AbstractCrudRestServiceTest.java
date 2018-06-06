@@ -80,7 +80,9 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		beforeCreate(entity);
 		svc.create(entity);
 
-		String jsonResult = testGet(getEntityClass().getSimpleName().toLowerCase());
+		String serviceName = getEntityClass().getSimpleName();
+		serviceName = Character.toLowerCase(serviceName.charAt(0)) + serviceName.substring(1);
+		String jsonResult = testGet(serviceName);
 
 		List<PathListEntry<Long>> result = parsePathListJson(jsonResult);
 		assertEquals(1, result.size());

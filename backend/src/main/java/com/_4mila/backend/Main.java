@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import com._4mila.backend.server.CorsHeaders;
 import com._4mila.backend.server.Database;
 import com._4mila.backend.server.EnvironmentUtility;
+import com._4mila.backend.service.clazz.ClazzRestService;
+import com._4mila.backend.service.clazz.EventClazzRestService;
 import com._4mila.backend.service.control.ControlRestService;
 import com._4mila.backend.service.course.CourseRestService;
 import com._4mila.backend.service.event.EventRestService;
@@ -78,6 +80,8 @@ public class Main {
 		injector.getInstance(EventRestService.class).init();
 		injector.getInstance(ControlRestService.class).init();
 		injector.getInstance(CourseRestService.class).init();
+		injector.getInstance(ClazzRestService.class).init();
+		injector.getInstance(EventClazzRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

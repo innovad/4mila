@@ -116,6 +116,75 @@ export class GuiModel {
                         }
                     ]
                 },
+                {
+                    "id": "ClassForm",
+                    "title": "Class",
+                    "url": "/clazz",
+                    "formFieldList": [
+                        {
+                            "id": "name",
+                            "type": "text",
+                            "name": "Name",
+                            "required": true,
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
+                    "id": "EventClassForm",
+                    "title": "Class",
+                    "url": "/eventClazz",
+                    "formFieldList": [
+                        {
+                            "id":   "clazz",
+                            "type": "autocomplete",
+                            "name": "Class",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "classKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "ClassForm",
+                            "url": "/clazz",
+                            "width": 2
+                        },
+                        {
+                            "id":   "event",
+                            "type": "autocomplete",
+                            "name": "Event",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "eventKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "EventForm",
+                            "url": "/event",
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
             ],
             "pageList": [
                 {
@@ -151,6 +220,30 @@ export class GuiModel {
                 },
                 {
                     "id": "adminpage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "Events",
+                            "icon": "fa-calendar",
+                            "color": "belize hole",
+                            "page": "eventspage",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Classes",
+                            "icon": "fa-users",
+                            "color": "wet-asphalt",
+                            "page": "classespage",
+                            "width": 2,
+                        },
+                    ]
+                },
+                {
+                    "id": "eventspage",
                     "elementList": [
                         {
                             "type": "backbutton",
@@ -195,26 +288,27 @@ export class GuiModel {
                             "type": "list",
                             "name": "Courses",
                             "icon": "fa-map",
-                            "color": "carrot",
+                            "color": "wisteria",
                             "search": false,
                             "url": "/event/:eventKey/course/summary",
                             "page": "coursespage",
                             "width": 2,
                         },
                         {
-                            "type": "button",
+                            "type": "list",
                             "name": "Classes",
                             "icon": "fa-users",
-                            "color": "carrot",
-                            "page": "entriespage",
-                            "tooltip": "NotYetImplemented",
+                            "color": "wet-asphalt",
+                            "search": false,
+                            "url": "/event/:eventKey/eventClazz/summary",
+                            "page": "eventclassespage",
                             "width": 2,
                         },
                         {
                             "type": "list",
                             "name": "Controls",
                             "icon": "fa-map-pin",
-                            "color": "carrot",
+                            "color": "alizarin",
                             "search": false,
                             "url": "/event/:eventKey/control/summary",
                             "page": "controlspage",
@@ -274,6 +368,62 @@ export class GuiModel {
                             "url": "/event/:eventKey/course",
                             "form": {
                                 "form": "CourseForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "eventclassespage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "AddClass",
+                            "width": 2,
+                            "icon": "fa-users",
+                            "color": "green",
+                            "form": {
+                                "form": "EventClassForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-users",
+                            "color": "wet-asphalt",
+                            "search": false,
+                            "url": "/event/:eventKey/eventClazz",
+                            "form": {
+                                "form": "EventClassForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "classespage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewClass",
+                            "width": 2,
+                            "icon": "fa-users",
+                            "color": "green",
+                            "form": {
+                                "form": "ClassForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-users",
+                            "color": "wet-asphalt",
+                            "search": true,
+                            "url": "/clazz",
+                            "form": {
+                                "form": "ClassForm"
                             }
                         }
                     ]

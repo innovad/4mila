@@ -3,10 +3,14 @@ package com._4mila.backend.server.testdata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com._4mila.backend.model.clazz.Clazz;
+import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.model.control.Control;
 import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.event.Event;
 import com._4mila.backend.service.AbstractDatabaseService;
+import com._4mila.backend.service.clazz.ClazzDatabaseService;
+import com._4mila.backend.service.clazz.EventClazzDatabaseService;
 import com._4mila.backend.service.control.ControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
@@ -25,6 +29,12 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	CourseDatabaseService courseDatabaseService;
+	
+	@Inject
+	ClazzDatabaseService clazzDatabaseService;
+	
+	@Inject
+	EventClazzDatabaseService eventClazzDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -55,6 +65,19 @@ public class TestDataService extends AbstractDatabaseService {
 		createTestCourse(event2, "Long");
 		createTestCourse(event2, "Short");
 		
+		Clazz he = createTestClass("HE");
+		Clazz de = createTestClass("DE");
+		Clazz h20 = createTestClass("H20");
+		Clazz d20 = createTestClass("D20");
+		
+		
+		createTestEventClass(event1, he);
+		createTestEventClass(event1, de);
+		createTestEventClass(event2, he);
+		createTestEventClass(event2, de);
+		createTestEventClass(event2, h20);
+		createTestEventClass(event2, d20);
+		
 		logger.info("Test Data created.");
 	}
 
@@ -81,4 +104,19 @@ public class TestDataService extends AbstractDatabaseService {
 		return course;
 	}
 	
+	private Clazz createTestClass(String name) {
+		Clazz clazz = new Clazz();
+		clazz.setName(name);
+		clazzDatabaseService.create(clazz);
+		return clazz;
+	}
+	
+	private EventClazz createTestEventClass(Event event, Clazz clazz) {
+		EventClazz eventClass = new EventClazz();
+		eventClass.setEvent(event);
+		eventClass.setClazz(clazz);
+		eventClazzDatabaseService.create(eventClass);
+		return eventClass;
+	}
+		
 }
