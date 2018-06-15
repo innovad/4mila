@@ -5,6 +5,7 @@
 		<class>com._4mila.backend.model.clazz.EventClazz</class>
 		<class>com._4mila.backend.model.control.Control</class>
 		<class>com._4mila.backend.model.course.Course</class>
+		<class>com._4mila.backend.model.course.CourseControl</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:assessmentTool;DB_CLOSE_DELAY=-1" />
