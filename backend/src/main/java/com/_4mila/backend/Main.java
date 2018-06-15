@@ -23,6 +23,7 @@ import com._4mila.backend.server.EnvironmentUtility;
 import com._4mila.backend.service.clazz.ClazzRestService;
 import com._4mila.backend.service.clazz.EventClazzRestService;
 import com._4mila.backend.service.control.ControlRestService;
+import com._4mila.backend.service.course.CourseControlRestService;
 import com._4mila.backend.service.course.CourseRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
@@ -82,6 +83,7 @@ public class Main {
 		injector.getInstance(CourseRestService.class).init();
 		injector.getInstance(ClazzRestService.class).init();
 		injector.getInstance(EventClazzRestService.class).init();
+		injector.getInstance(CourseControlRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

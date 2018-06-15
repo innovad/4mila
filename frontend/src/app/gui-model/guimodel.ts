@@ -117,6 +117,58 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "CourseControlForm",
+                    "title": "Control",
+                    "url": "/courseControl",
+                    "formFieldList": [
+                        {
+                            "id":   "control",
+                            "type": "autocomplete",
+                            "name": "Control",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "controlKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "ControlForm",
+                            "url": "/control",
+                            "width": 2
+                        },
+                        {
+                            "id":   "course",
+                            "type": "autocomplete",
+                            "name": "Course",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "courseKey",
+                            "required": true,
+                            "readonly": true,
+                            "form": "CourseForm",
+                            "url": "/course",
+                            "width": 2
+                        },
+                        {
+                            "id": "sortOrder",
+                            "type": "number",
+                            "min": 1,
+                            "max": 999999,
+                            "name": "SortOrder",
+                            "required": true,
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
                     "id": "ClassForm",
                     "title": "Class",
                     "url": "/clazz",
@@ -366,8 +418,44 @@ export class GuiModel {
                             "color": "belize hole",
                             "search": false,
                             "url": "/event/:eventKey/course",
+                            "page": "coursepage"
+                        }
+                    ]
+                },
+                {
+                    "id": "coursepage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "EditCourse",
+                            "width": 2,
+                            "icon": "fa-map",
+                            "color": "green",
                             "form": {
                                 "form": "CourseForm"
+                            }
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "AddControl",
+                            "width": 2,
+                            "icon": "fa-map-pin",
+                            "color": "green",
+                            "form": {
+                                "form": "CourseControlForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-map-pin",
+                            "color": "belize hole",
+                            "search": false,
+                            "url": "/course/:courseKey/courseControl",
+                            "form": {
+                                "form": "CourseControlForm"
                             }
                         }
                     ]

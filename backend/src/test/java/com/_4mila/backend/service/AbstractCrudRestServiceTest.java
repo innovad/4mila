@@ -24,6 +24,7 @@ import org.junit.Test;
 import com._4mila.backend.model.AbstractEntity;
 import com._4mila.backend.server.json.JsonHelper;
 import com.google.common.io.CharStreams;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
@@ -80,8 +81,7 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		beforeCreate(entity);
 		svc.create(entity);
 
-		String serviceName = getEntityClass().getSimpleName();
-		serviceName = Character.toLowerCase(serviceName.charAt(0)) + serviceName.substring(1);
+		String serviceName = Character.toLowerCase(getEntityClass().getSimpleName().charAt(0)) + getEntityClass().getSimpleName().substring(1);
 		String jsonResult = testGet(serviceName);
 
 		List<PathListEntry<Long>> result = parsePathListJson(jsonResult);
@@ -104,7 +104,12 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 	protected List<PathListEntry<Long>> parsePathListJson(String jsonResult) {
 		TypeToken<ArrayList<PathListEntry<Long>>> token = new TypeToken<ArrayList<PathListEntry<Long>>>() {
 		};
-		List<PathListEntry<Long>> result = getInjector().getInstance(JsonHelper.class).getGson().fromJson(jsonResult, token.getType());
+		List<PathListEntry<Long>> result = null;
+		try {
+			result = getInjector().getInstance(JsonHelper.class).getGson().fromJson(jsonResult, token.getType());
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException("Cannot parse " + jsonResult, e);
+		}
 		return result;
 	}
 

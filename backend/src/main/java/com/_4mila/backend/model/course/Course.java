@@ -1,7 +1,11 @@
 package com._4mila.backend.model.course;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,6 +21,9 @@ public class Course extends AbstractEntity implements Comparable<Course> {
 	@ManyToOne
 	private Event event;
 
+	@OneToMany (mappedBy = "course")
+	private Set<CourseControl> courseControls = new HashSet<>();
+	
 	public String getName() {
 		return name;
 	}
@@ -31,6 +38,10 @@ public class Course extends AbstractEntity implements Comparable<Course> {
 
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+	
+	public Set<CourseControl> getCourseControls() {
+		return courseControls;
 	}
 
 	@Override
