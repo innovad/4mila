@@ -38,9 +38,11 @@ public class CourseControlRestServiceTest extends AbstractCrudRestServiceTest<Co
 		eventDatabaseService.create(e);
 		Control c1 = new Control();
 		c1.setEvent(e);
+		c1.setId("31");
 		controlDatabaseService.create(c1);
 		Control c2 = new Control();
 		c2.setEvent(e);
+		c2.setId("32");
 		controlDatabaseService.create(c2);
 		Course course = new Course();
 		courseDatabaseService.create(course);
