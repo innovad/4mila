@@ -26,6 +26,7 @@ export class _4milaTranslationService extends TranslationService {
             "Admin": "Admin",
             "AddClass": "Add Class",
             "AddControl": "Add Control",
+            "Birthdate": "Birthdate",
             "Class": "Class",
             "Classes": "Classes",
             "Control": "Control",
@@ -37,14 +38,19 @@ export class _4milaTranslationService extends TranslationService {
             "EditEvent": "Edit Event",
             "Event": "Event",
             "Events": "Events",
+            "FamilyName": "Family Name",
+            "FirstName": "First Name",
             "Name": "Name",
             "NewEvent": "New Event",
             "NewClass": "New Class",
             "NewControl": "New Control",
             "NewCourse": "New Course",
+            "NewRunner": "New Runner",
             "NotYetImplemented": "This function is not yet implemented.",
             "Number": "Number",
             "Results": "Results",
+            "Runner": "Runner",
+            "Runners": "Runners",
             "SortOrder": "Sort Order"
         }
     }

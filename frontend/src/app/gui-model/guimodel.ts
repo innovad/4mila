@@ -41,6 +41,43 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "RunnerForm",
+                    "title": "Runner",
+                    "url": "/runner",
+                    "formFieldList": [
+                        {
+                            "id": "familyName",
+                            "type": "text",
+                            "name": "FamilyName",
+                            "required": true
+                        },
+                        {
+                            "id": "firstName",
+                            "type": "text",
+                            "name": "FirstName",
+                            "required": true
+                        },
+                        {
+                            "id": "birthDate",
+                            "type": "date",
+                            "name": "Birthdate",
+                            "required": false
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
                     "id": "ControlForm",
                     "title": "Control",
                     "url": "/control",
@@ -297,6 +334,14 @@ export class GuiModel {
                         },
                         {
                             "type": "button",
+                            "name": "Runners",
+                            "icon": "fa-user",
+                            "color": "pink",
+                            "page": "runnerspage",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
                             "name": "Classes",
                             "icon": "fa-users",
                             "color": "wet-asphalt",
@@ -495,6 +540,34 @@ export class GuiModel {
                             "url": "/event/:eventKey/eventClazz",
                             "form": {
                                 "form": "EventClassForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "runnerspage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewRunner",
+                            "width": 2,
+                            "icon": "fa-user",
+                            "color": "green",
+                            "form": {
+                                "form": "RunnerForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-user",
+                            "color": "pink",
+                            "search": true,
+                            "url": "/runner",
+                            "form": {
+                                "form": "RunnerForm"
                             }
                         }
                     ]

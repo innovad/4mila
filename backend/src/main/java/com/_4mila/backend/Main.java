@@ -28,6 +28,7 @@ import com._4mila.backend.service.course.CourseRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
 import com._4mila.backend.service.language.LanguageUtility;
+import com._4mila.backend.service.runner.RunnerRestService;
 import com._4mila.backend.service.user.UserRestService;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
@@ -84,6 +85,7 @@ public class Main {
 		injector.getInstance(ClazzRestService.class).init();
 		injector.getInstance(EventClazzRestService.class).init();
 		injector.getInstance(CourseControlRestService.class).init();
+		injector.getInstance(RunnerRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

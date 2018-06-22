@@ -9,6 +9,7 @@ import com._4mila.backend.model.control.Control;
 import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.event.Event;
+import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.service.AbstractDatabaseService;
 import com._4mila.backend.service.clazz.ClazzDatabaseService;
 import com._4mila.backend.service.clazz.EventClazzDatabaseService;
@@ -16,6 +17,7 @@ import com._4mila.backend.service.control.ControlDatabaseService;
 import com._4mila.backend.service.course.CourseControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
+import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -40,6 +42,9 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	CourseControlDatabaseService courseControlDatabaseService;
+	
+	@Inject
+	RunnerDatabaseService runnerDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -98,6 +103,9 @@ public class TestDataService extends AbstractDatabaseService {
 		createTestCourseControl(2, courseLong, e2control101);
 		createTestCourseControl(3, courseLong, e2control102);
 		
+		createTestRunner("Niggli-Luder", "Simone");
+		createTestRunner("Hubmann", "Daniel");
+		
 		logger.info("Test Data created.");
 	}
 
@@ -147,6 +155,14 @@ public class TestDataService extends AbstractDatabaseService {
 		courseControl.setSortOrder(sortOrder);
 		courseControlDatabaseService.create(courseControl);
 		return courseControl;
+	}
+	
+	private Runner createTestRunner(String familyName, String firstName) {
+		Runner runner = new Runner();
+		runner.setFamilyName(familyName);
+		runner.setFirstName(firstName);
+		runnerDatabaseService.create(runner);
+		return runner;
 	}
 		
 }
