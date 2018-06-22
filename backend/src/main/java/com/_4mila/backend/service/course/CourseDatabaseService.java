@@ -21,6 +21,11 @@ public class CourseDatabaseService extends AbstractCrudDatabaseService<Course, L
 	public void createPathListEntry(Course entity, PathListEntry<Long> entry) {
 		entry.setKey(entity.getKey(), getKeyName());
 		entry.setName(entity.getName());
+		if (entity.getCourseControls().size() == 1) {
+			entry.getDetails().add(entity.getCourseControls().size() + " control");
+		} else {
+			entry.getDetails().add(entity.getCourseControls().size() + " controls");
+		}
 	}
 
 	@Override
