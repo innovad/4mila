@@ -45,7 +45,7 @@ export class _4milaTranslationService extends TranslationService {
             "NotYetImplemented": "This function is not yet implemented.",
             "Number": "Number",
             "Results": "Results",
-            "SortOrder": "SortOrder"
+            "SortOrder": "Sort Order"
         }
     }
 }
