@@ -398,7 +398,7 @@ export class GuiModel {
                         {
                             "type": "list",
                             "icon": "fa-map-pin",
-                            "color": "belize hole",
+                            "color": "alizarin",
                             "search": false,
                             "url": "/event/:eventKey/control",
                             "form": {
@@ -426,7 +426,7 @@ export class GuiModel {
                         {
                             "type": "list",
                             "icon": "fa-map",
-                            "color": "belize hole",
+                            "color": "wisteria",
                             "search": false,
                             "url": "/event/:eventKey/course",
                             "page": "coursepage"
@@ -462,7 +462,7 @@ export class GuiModel {
                         {
                             "type": "list",
                             "icon": "fa-map-pin",
-                            "color": "belize hole",
+                            "color": "alizarin",
                             "search": false,
                             "url": "/course/:courseKey/courseControl",
                             "form": {
