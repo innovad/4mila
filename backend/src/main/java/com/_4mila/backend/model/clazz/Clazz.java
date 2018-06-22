@@ -18,7 +18,7 @@ public class Clazz extends AbstractEntity implements Comparable<Clazz> {
 
 	@OneToMany (mappedBy = "clazz")
 	private Set<EventClazz> eventClasses = new HashSet<>();
-
+	
 	public String getName() {
 		return name;
 	}
@@ -30,7 +30,7 @@ public class Clazz extends AbstractEntity implements Comparable<Clazz> {
 	public Set<EventClazz> getEventClasses() {
 		return eventClasses;
 	}
-
+	
 	@Override
 	public int compareTo(Clazz o) {
 		int nameComparison = this.getName().compareTo(o.getName());

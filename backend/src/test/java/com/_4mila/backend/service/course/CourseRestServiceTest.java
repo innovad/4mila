@@ -46,5 +46,29 @@ public class CourseRestServiceTest extends AbstractCrudRestServiceTest<Course, L
 		courseDatabaseService.delete(c1);
 		eventDatabaseService.delete(e);
 	}
+	
+	@Test
+	public void testGetEventCoursesSummary() throws Exception {
+		CourseDatabaseService courseDatabaseService = getInjector().getInstance(CourseDatabaseService.class);
+		EventDatabaseService eventDatabaseService = getInjector().getInstance(EventDatabaseService.class);
+
+		Event e = new Event();
+		eventDatabaseService.create(e);
+		Course c1 = new Course();
+		c1.setEvent(e);
+		courseDatabaseService.create(c1);
+		Course c2 = new Course();
+		c2.setEvent(e);
+		courseDatabaseService.create(c2);
+
+		String jsonResult = testGet("event/" + e.getKey() + "/course/summary");
+		List<PathListEntry<Long>> result = parsePathListJson(jsonResult);
+		assertEquals("1 button", 1, result.size());
+		assertEquals("2 courses", "2", result.get(0).getDetails().get(0));
+
+		courseDatabaseService.delete(c2);
+		courseDatabaseService.delete(c1);
+		eventDatabaseService.delete(e);
+	}
 
 }

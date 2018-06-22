@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com._4mila.backend.model.AbstractEntity;
+import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.event.Event;
 
 @Entity
@@ -20,6 +21,9 @@ public class EventClazz extends AbstractEntity implements Comparable<EventClazz>
 	@JoinColumn(name = "class_key")
 	private Clazz clazz;
 
+	@ManyToOne
+	private Course course;
+	
 	public Event getEvent() {
 		return event;
 	}
@@ -30,6 +34,14 @@ public class EventClazz extends AbstractEntity implements Comparable<EventClazz>
 
 	public Clazz getClazz() {
 		return clazz;
+	}
+	
+	public Course getCourse() {
+		return course;
+	}
+	
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public void setClazz(Clazz clazz) {

@@ -75,13 +75,12 @@ public class TestDataService extends AbstractDatabaseService {
 		Clazz h20 = createTestClass("H20");
 		Clazz d20 = createTestClass("D20");
 		
-		
-		createTestEventClass(event1, he);
-		createTestEventClass(event1, de);
-		createTestEventClass(event2, he);
-		createTestEventClass(event2, de);
-		createTestEventClass(event2, h20);
-		createTestEventClass(event2, d20);
+		createTestEventClass(event1, he, courseA);
+		createTestEventClass(event1, de, courseB);
+		createTestEventClass(event2, he, courseLong);
+		createTestEventClass(event2, de, courseLong);
+		createTestEventClass(event2, h20, courseShort);
+		createTestEventClass(event2, d20, courseShort);
 		
 		createTestCourseControl(1, courseA, e1control31);
 		createTestCourseControl(2, courseA, e1control32);
@@ -132,10 +131,11 @@ public class TestDataService extends AbstractDatabaseService {
 		return clazz;
 	}
 	
-	private EventClazz createTestEventClass(Event event, Clazz clazz) {
+	private EventClazz createTestEventClass(Event event, Clazz clazz, Course course) {
 		EventClazz eventClass = new EventClazz();
 		eventClass.setEvent(event);
 		eventClass.setClazz(clazz);
+		eventClass.setCourse(course);
 		eventClazzDatabaseService.create(eventClass);
 		return eventClass;
 	}

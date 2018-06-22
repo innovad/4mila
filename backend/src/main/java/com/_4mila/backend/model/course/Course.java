@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com._4mila.backend.model.AbstractEntity;
+import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.model.event.Event;
 
 @Entity
@@ -23,6 +24,9 @@ public class Course extends AbstractEntity implements Comparable<Course> {
 
 	@OneToMany (mappedBy = "course")
 	private Set<CourseControl> courseControls = new HashSet<>();
+	
+	@OneToMany (mappedBy = "course")
+	private Set<EventClazz> eventClasses = new HashSet<>();
 	
 	public String getName() {
 		return name;
@@ -42,6 +46,10 @@ public class Course extends AbstractEntity implements Comparable<Course> {
 	
 	public Set<CourseControl> getCourseControls() {
 		return courseControls;
+	}
+	
+	public Set<EventClazz> getEventClasses() {
+		return eventClasses;
 	}
 
 	@Override

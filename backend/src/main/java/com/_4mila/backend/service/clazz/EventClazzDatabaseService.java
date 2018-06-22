@@ -23,6 +23,9 @@ public class EventClazzDatabaseService extends AbstractCrudDatabaseService<Event
 		if (entity.getClazz() != null) {
 			entry.setName(entity.getClazz().getName());
 		}
+		if (entity.getCourse() != null) {
+			entry.getDetails().add(entity.getCourse().getName());
+		}
 	}
 
 	@Override

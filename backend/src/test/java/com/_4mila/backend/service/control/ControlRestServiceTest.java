@@ -46,5 +46,29 @@ public class ControlRestServiceTest extends AbstractCrudRestServiceTest<Control,
 		controlDatabaseService.delete(c1);
 		eventDatabaseService.delete(e);
 	}
+	
+	@Test
+	public void testGetEventControlsSummary() throws Exception {
+		ControlDatabaseService controlDatabaseService = getInjector().getInstance(ControlDatabaseService.class);
+		EventDatabaseService eventDatabaseService = getInjector().getInstance(EventDatabaseService.class);
+
+		Event e = new Event();
+		eventDatabaseService.create(e);
+		Control c1 = new Control();
+		c1.setEvent(e);
+		controlDatabaseService.create(c1);
+		Control c2 = new Control();
+		c2.setEvent(e);
+		controlDatabaseService.create(c2);
+
+		String jsonResult = testGet("event/" + e.getKey() + "/control/summary");
+		List<PathListEntry<Long>> result = parsePathListJson(jsonResult);
+		assertEquals("1 button", 1, result.size());
+		assertEquals("2 controls", "2", result.get(0).getDetails().get(0));
+
+		controlDatabaseService.delete(c2);
+		controlDatabaseService.delete(c1);
+		eventDatabaseService.delete(e);
+	}
 
 }

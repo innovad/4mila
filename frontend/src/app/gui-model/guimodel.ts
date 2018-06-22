@@ -212,6 +212,17 @@ export class GuiModel {
                             "width": 2
                         },
                         {
+                            "id":   "course",
+                            "type": "autocomplete",
+                            "name": "Course",
+                            "wordSearchEnabled": true,
+                            "required": true,
+                            "readonly": true,
+                            "form": "CourseForm",
+                            "url": "/course",
+                            "width": 2
+                        },
+                        {
                             "id":   "event",
                             "type": "autocomplete",
                             "name": "Event",
