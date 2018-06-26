@@ -323,7 +323,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Please type your name</h3>"
+                            "value": "<h3>Please type your name (TODO: new entry or find existing entry)</h3>"
                         },
                         {
                             "type": "backbutton",
