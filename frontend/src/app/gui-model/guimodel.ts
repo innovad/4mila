@@ -384,6 +384,41 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "resultspage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "Latest",
+                            "icon": "fa-list-ol",
+                            "color": "carrot",
+                            "page": "resultslatestpage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Class",
+                            "icon": "fa-list-ol",
+                            "color": "wet-asphalt",
+                            "page": "resultsclasspage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Course",
+                            "icon": "fa-list-ol",
+                            "color": "wisteria",
+                            "page": "resultscoursepage",
+                            "tooltip": "NotYetImplemented",
+                            "width": 2,
+                        },
+                    ]
+                },
+                {
                     "id": "adminpage",
                     "elementList": [
                         {

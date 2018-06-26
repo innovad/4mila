@@ -40,6 +40,7 @@ export class _4milaTranslationService extends TranslationService {
             "Events": "Events",
             "FamilyName": "Family Name",
             "FirstName": "First Name",
+            "Latest": "Latest",
             "Name": "Name",
             "NewEvent": "New Event",
             "NewClass": "New Class",
