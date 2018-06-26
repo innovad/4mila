@@ -7,6 +7,7 @@
 		<class>com._4mila.backend.model.course.Course</class>
 		<class>com._4mila.backend.model.course.CourseControl</class>
 		<class>com._4mila.backend.model.runner.Runner</class>
+		<class>com._4mila.backend.model.settings.Settings</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:assessmentTool;DB_CLOSE_DELAY=-1" />

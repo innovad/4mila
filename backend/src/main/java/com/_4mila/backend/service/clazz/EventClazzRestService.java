@@ -9,6 +9,7 @@ import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.service.AbstractCrudRestService;
 import com._4mila.backend.service.PathListEntry;
 import com._4mila.backend.service.event.EventDatabaseService;
+import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
 import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -17,6 +18,9 @@ public class EventClazzRestService extends AbstractCrudRestService<EventClazz, L
 
 	@Inject
 	EventDatabaseService eventDatabaseService;
+	
+	@Inject
+	SettingsDatabaseService settingsDatabaseService;
 	
 	@Inject
 	public EventClazzRestService(Injector injector) {
@@ -29,6 +33,9 @@ public class EventClazzRestService extends AbstractCrudRestService<EventClazz, L
 
 		get("services/event/:eventKey/eventClazz", (req, res) -> {
 			Long eventNr = Longs.tryParse(req.params("eventKey"));
+			if (eventNr == null) {
+				eventNr = settingsDatabaseService.getSettings().getDefaultEvent().getKey();
+			}
 			return getDatabaseService().createPathList(eventDatabaseService.read(eventNr).getEventClasses());
 		}, getJsonTransformer());
 		

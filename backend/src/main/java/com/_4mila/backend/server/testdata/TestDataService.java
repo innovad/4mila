@@ -10,6 +10,7 @@ import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.event.Event;
 import com._4mila.backend.model.runner.Runner;
+import com._4mila.backend.model.settings.Settings;
 import com._4mila.backend.service.AbstractDatabaseService;
 import com._4mila.backend.service.clazz.ClazzDatabaseService;
 import com._4mila.backend.service.clazz.EventClazzDatabaseService;
@@ -18,6 +19,7 @@ import com._4mila.backend.service.course.CourseControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
+import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -45,6 +47,9 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	RunnerDatabaseService runnerDatabaseService;
+	
+	@Inject
+	SettingsDatabaseService settingsDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -105,6 +110,11 @@ public class TestDataService extends AbstractDatabaseService {
 		
 		createTestRunner("Niggli-Luder", "Simone");
 		createTestRunner("Hubmann", "Daniel");
+		
+		// create default settings
+		Settings settings = new Settings();
+		settings.setDefaultEvent(event1);
+		settingsDatabaseService.create(settings);
 		
 		logger.info("Test Data created.");
 	}

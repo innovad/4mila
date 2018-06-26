@@ -319,6 +319,71 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "entriespage",
+                    "elementList": [
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Please type your name</h3>"
+                        },
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-user",
+                            "color": "pink",
+                            "search": true,
+                            "limit": 100,
+                            "url": "/runner",
+                            "page": "entryclasspage"
+                        },
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>If you cannot find yourself, please create a new runner</h3>",
+                            "newRow": true,
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewRunner",
+                            "width": 2,
+                            "icon": "fa-user",
+                            "color": "green",
+                            "form": {
+                                "form": "RunnerForm"
+                            }
+                        },
+                    ]
+                },
+                {
+                    "id": "entryclasspage",
+                    "elementList": [
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Please select a class</h3>"
+                        },
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-users",
+                            "color": "wet-asphalt",
+                            "search": false,
+                            "url": "/event/:eventKey/eventClazz",
+                            "page": "entryconfirmedpage"
+                        }
+                    ]
+                },
+                {
+                    "id": "entryconfirmedpage",
+                    "elementList": [
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Your entry is confirmed.</h3>"
+                        },
+                    ]
+                },
+                {
                     "id": "adminpage",
                     "elementList": [
                         {
@@ -565,6 +630,7 @@ export class GuiModel {
                             "icon": "fa-user",
                             "color": "pink",
                             "search": true,
+                            "limit": 100,
                             "url": "/runner",
                             "form": {
                                 "form": "RunnerForm"
