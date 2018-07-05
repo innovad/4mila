@@ -25,9 +25,12 @@ import com._4mila.backend.service.clazz.EventClazzRestService;
 import com._4mila.backend.service.control.ControlRestService;
 import com._4mila.backend.service.course.CourseControlRestService;
 import com._4mila.backend.service.course.CourseRestService;
+import com._4mila.backend.service.ecard.EcardRestService;
+import com._4mila.backend.service.entry.EntryRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
 import com._4mila.backend.service.language.LanguageUtility;
+import com._4mila.backend.service.race.RaceRestService;
 import com._4mila.backend.service.runner.RunnerRestService;
 import com._4mila.backend.service.runner.settings.SettingsRestService;
 import com._4mila.backend.service.user.UserRestService;
@@ -88,6 +91,9 @@ public class Main {
 		injector.getInstance(CourseControlRestService.class).init();
 		injector.getInstance(RunnerRestService.class).init();
 		injector.getInstance(SettingsRestService.class).init();
+		injector.getInstance(EntryRestService.class).init();
+		injector.getInstance(RaceRestService.class).init();
+		injector.getInstance(EcardRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

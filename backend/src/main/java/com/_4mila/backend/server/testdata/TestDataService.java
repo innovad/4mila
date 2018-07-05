@@ -8,6 +8,7 @@ import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.model.control.Control;
 import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.course.CourseControl;
+import com._4mila.backend.model.ecard.Ecard;
 import com._4mila.backend.model.event.Event;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.model.settings.Settings;
@@ -17,6 +18,7 @@ import com._4mila.backend.service.clazz.EventClazzDatabaseService;
 import com._4mila.backend.service.control.ControlDatabaseService;
 import com._4mila.backend.service.course.CourseControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
+import com._4mila.backend.service.ecard.EcardDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
@@ -50,6 +52,9 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	SettingsDatabaseService settingsDatabaseService;
+	
+	@Inject
+	EcardDatabaseService eCardDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -107,9 +112,12 @@ public class TestDataService extends AbstractDatabaseService {
 		createTestCourseControl(1, courseLong, e2control100);
 		createTestCourseControl(2, courseLong, e2control101);
 		createTestCourseControl(3, courseLong, e2control102);
+
+		Ecard ecard1 = createTestECard("123456");
+		Ecard ecard2 = createTestECard("900004");
 		
-		createTestRunner("Niggli-Luder", "Simone");
-		createTestRunner("Hubmann", "Daniel");
+		createTestRunner("Niggli-Luder", "Simone", ecard1);
+		createTestRunner("Hubmann", "Daniel", ecard2);
 		
 		// create default settings
 		Settings settings = new Settings();
@@ -167,12 +175,20 @@ public class TestDataService extends AbstractDatabaseService {
 		return courseControl;
 	}
 	
-	private Runner createTestRunner(String familyName, String firstName) {
+	private Runner createTestRunner(String familyName, String firstName, Ecard ecard) {
 		Runner runner = new Runner();
 		runner.setFamilyName(familyName);
 		runner.setFirstName(firstName);
+		runner.setDefaultEcard(ecard);
 		runnerDatabaseService.create(runner);
 		return runner;
+	}
+	
+	private Ecard createTestECard(String id) {
+		Ecard ecard = new Ecard();
+		ecard.setId(id);
+		eCardDatabaseService.create(ecard);
+		return ecard;
 	}
 		
 }

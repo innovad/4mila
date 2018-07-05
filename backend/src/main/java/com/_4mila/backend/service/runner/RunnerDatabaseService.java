@@ -20,7 +20,10 @@ public class RunnerDatabaseService extends AbstractCrudDatabaseService<Runner, L
 	@Override
 	public void createPathListEntry(Runner entity, PathListEntry<Long> entry) {
 		entry.setKey(entity.getKey(), getKeyName());
-		entry.setName(entity.getFamilyName() + " " + entity.getFirstName());
+		entry.setName(entity.getName());
+		if (entity.getDefaultEcard() != null) {
+			entry.getDetails().add(entity.getDefaultEcard().getId());
+		}
 	}
 
 	@Override

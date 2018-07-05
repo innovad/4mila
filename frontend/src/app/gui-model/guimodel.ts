@@ -64,6 +64,125 @@ export class GuiModel {
                             "required": false
                         },
                         {
+                            "id":   "defaultEcard",
+                            "type": "autocomplete",
+                            "name": "Ecard",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "ecardKey",
+                            "required": true,
+                            "form": "EcardForm",
+                            "url": "/ecard",
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
+                    "id": "EcardForm",
+                    "title": "Ecard",
+                    "url": "/ecard",
+                    "formFieldList": [
+                        {
+                            "id": "id",
+                            "type": "text",
+                            "name": "ID",
+                            "required": true,
+                            "width": 2,
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
+                    "id": "RaceForm",
+                    "title": "Race",
+                    "url": "/race",
+                    "formFieldList": [
+                        {
+                            "id":   "entry",
+                            "type": "autocomplete",
+                            "name": "Entry",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "entryKey",
+                            "required": true,
+                            "form": "EntryForm",
+                            "url": "/entry",
+                            "width": 2
+                        },
+                        {
+                            "id":   "runner",
+                            "type": "autocomplete",
+                            "name": "Runner",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "runnerKey",
+                            "required": true,
+                            "form": "RunnerForm",
+                            "url": "/runner",
+                            "width": 2
+                        },
+                        {
+                            "id":   "ecard",
+                            "type": "autocomplete",
+                            "name": "ECard",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "ecardKey",
+                            "required": true,
+                            "form": "ECardForm",
+                            "url": "/ecard",
+                            "width": 2
+                        },
+                        {
+                            "id":   "eventClazz",
+                            "type": "autocomplete",
+                            "name": "Class",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "eventClazzKey",
+                            "required": true,
+                            "form": "EventClassForm",
+                            "url": "/eventClazz",
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
+                    "id": "EntryForm",
+                    "title": "Entry",
+                    "url": "/entry",
+                    "formFieldList": [
+                        {
                             "type": "deleteButton",
                             "name": "Delete"
                         },
@@ -381,6 +500,16 @@ export class GuiModel {
                             "type": "pageLabel",
                             "value": "<h3>Your entry is confirmed.</h3>"
                         },
+                        {
+                            "type": "list",
+                            "icon": "fa-thumbs-up",
+                            "color": "green",
+                            "search": false,
+                            "url": "/entry/:entryKey/runner/:runnerKey/eventClazz/:eventClazzKey",
+                            "form": {
+                                "form": "RaceForm"
+                            }
+                        }
                     ]
                 },
                 {
@@ -438,6 +567,14 @@ export class GuiModel {
                             "icon": "fa-user",
                             "color": "pink",
                             "page": "runnerspage",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Ecards",
+                            "icon": "fa-tag",
+                            "color": "teal",
+                            "page": "ecardspage",
                             "width": 2,
                         },
                         {
@@ -669,6 +806,35 @@ export class GuiModel {
                             "url": "/runner",
                             "form": {
                                 "form": "RunnerForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "ecardspage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "NewEcard",
+                            "width": 2,
+                            "icon": "fa-tag",
+                            "color": "green",
+                            "form": {
+                                "form": "EcardForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-tag",
+                            "color": "teal",
+                            "search": true,
+                            "limit": 100,
+                            "url": "/ecard",
+                            "form": {
+                                "form": "EcardForm"
                             }
                         }
                     ]
