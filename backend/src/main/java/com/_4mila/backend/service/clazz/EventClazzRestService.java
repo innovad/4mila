@@ -9,7 +9,7 @@ import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.service.AbstractCrudRestService;
 import com._4mila.backend.service.PathListEntry;
 import com._4mila.backend.service.event.EventDatabaseService;
-import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
+import com._4mila.backend.service.settings.SettingsDatabaseService;
 import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;

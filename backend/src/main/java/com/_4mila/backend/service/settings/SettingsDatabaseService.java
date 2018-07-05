@@ -1,4 +1,4 @@
-package com._4mila.backend.service.runner.settings;
+package com._4mila.backend.service.settings;
 
 import java.util.List;
 

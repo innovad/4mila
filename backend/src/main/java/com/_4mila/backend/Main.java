@@ -32,7 +32,7 @@ import com._4mila.backend.service.exception.ExceptionRestService;
 import com._4mila.backend.service.language.LanguageUtility;
 import com._4mila.backend.service.race.RaceRestService;
 import com._4mila.backend.service.runner.RunnerRestService;
-import com._4mila.backend.service.runner.settings.SettingsRestService;
+import com._4mila.backend.service.settings.SettingsRestService;
 import com._4mila.backend.service.user.UserRestService;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;

@@ -21,7 +21,7 @@ import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.ecard.EcardDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
-import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
+import com._4mila.backend.service.settings.SettingsDatabaseService;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 

@@ -9,7 +9,6 @@ import com._4mila.backend.model.event.Event;
 import com._4mila.backend.model.settings.Settings;
 import com._4mila.backend.service.AbstractCrudDatabaseServiceTest;
 import com._4mila.backend.service.event.EventDatabaseService;
-import com._4mila.backend.service.runner.settings.SettingsDatabaseService;
 
 public class SettingsDatabaseServiceTest extends AbstractCrudDatabaseServiceTest<Settings, Long> {
 
