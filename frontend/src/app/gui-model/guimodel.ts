@@ -144,7 +144,7 @@ export class GuiModel {
                         {
                             "id":   "ecard",
                             "type": "autocomplete",
-                            "name": "ECard",
+                            "name": "Ecard",
                             "wordSearchEnabled": true,
                             "defaultKey": "ecardKey",
                             "required": true,
