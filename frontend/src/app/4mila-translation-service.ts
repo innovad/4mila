@@ -26,6 +26,7 @@ export class _4milaTranslationService extends TranslationService {
             "Admin": "Admin",
             "AddClass": "Add Class",
             "AddControl": "Add Control",
+            "All": "All",
             "Birthdate": "Birthdate",
             "Class": "Class",
             "Classes": "Classes",

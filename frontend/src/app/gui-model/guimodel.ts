@@ -545,6 +545,14 @@ export class GuiModel {
                             "tooltip": "NotYetImplemented",
                             "width": 2,
                         },
+                        {
+                            "type": "button",
+                            "name": "All",
+                            "icon": "fa-list-ol",
+                            "color": "lime",
+                            "page": "resultsallpage",
+                            "width": 2,
+                        },
                     ]
                 },
                 {
@@ -863,6 +871,24 @@ export class GuiModel {
                             "url": "/clazz",
                             "form": {
                                 "form": "ClassForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "resultsallpage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-users",
+                            "color": "lime",
+                            "search": true,
+                            "url": "/race",
+                            "form": {
+                                "form": "RaceForm"
                             }
                         }
                     ]
