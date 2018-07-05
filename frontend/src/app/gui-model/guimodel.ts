@@ -148,7 +148,7 @@ export class GuiModel {
                             "wordSearchEnabled": true,
                             "defaultKey": "ecardKey",
                             "required": true,
-                            "form": "ECardForm",
+                            "form": "EcardForm",
                             "url": "/ecard",
                             "width": 2
                         },

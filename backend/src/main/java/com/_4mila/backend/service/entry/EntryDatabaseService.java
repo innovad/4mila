@@ -20,6 +20,7 @@ public class EntryDatabaseService extends AbstractCrudDatabaseService<Entry, Lon
 	@Override
 	public void createPathListEntry(Entry entity, PathListEntry<Long> entry) {
 		entry.setKey(entity.getKey(), getKeyName());
+		entry.setName("" + entity.getKey());
 	}
 
 	@Override
