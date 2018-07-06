@@ -246,6 +246,34 @@ export class GuiModel {
                             "width": 2
                         },
                         {
+                            "id": "status",
+                            "type": "RadioGroupField",
+                            "name": "Status",
+                            "alignment": "horizontal",
+                            "width": 2,
+                            "radios": [{
+                                type: "radio",
+                                name: "InitialStatus",
+                                key: "InitialStatus"
+                            }, {
+                                type: "radio",
+                                name: "Ok",
+                                key: "Ok"
+                            }, {
+                                type: "radio",
+                                name: "Missing",
+                                key: "Missing"
+                            }, {
+                                type: "radio",
+                                name: "Additional",
+                                key: "Additional"
+                            }, {
+                                type: "radio",
+                                name: "Wrong",
+                                key: "Wrong"
+                            }]
+                        },
+                        {
                             "type": "deleteButton",
                             "name": "Delete"
                         },

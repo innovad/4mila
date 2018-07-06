@@ -23,6 +23,9 @@ public class RaceControlDatabaseService extends AbstractCrudDatabaseService<Race
 			entry.setName(entity.getCourseControl().getControl().getId());
 		}
 		entry.getDetails().add("" + entity.getSortOrder());
+		if (entity.getStatus() != null) {
+			entry.getDetails().add(entity.getStatus().name());
+		}
 	}
 
 	@Override
