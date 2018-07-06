@@ -11,6 +11,7 @@ import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.ecard.Ecard;
 import com._4mila.backend.model.event.Event;
 import com._4mila.backend.model.race.Race;
+import com._4mila.backend.model.race.RaceControl;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.model.settings.Settings;
 import com._4mila.backend.service.AbstractDatabaseService;
@@ -22,6 +23,7 @@ import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.ecard.EcardDatabaseService;
 import com._4mila.backend.service.entry.EntryDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
+import com._4mila.backend.service.race.RaceControlDatabaseService;
 import com._4mila.backend.service.race.RaceDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com._4mila.backend.service.settings.SettingsDatabaseService;
@@ -64,6 +66,9 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	RaceDatabaseService raceDatabaseService;
+	
+	@Inject
+	RaceControlDatabaseService raceControlDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -118,9 +123,9 @@ public class TestDataService extends AbstractDatabaseService {
 		createTestCourseControl(1, courseShort, e2control99);
 		createTestCourseControl(1, courseShort, e2control100);
 				
-		createTestCourseControl(1, courseLong, e2control100);
-		createTestCourseControl(2, courseLong, e2control101);
-		createTestCourseControl(3, courseLong, e2control102);
+		CourseControl courseControlCourseLong1 = createTestCourseControl(1, courseLong, e2control100);
+		CourseControl courseControlCourseLong2 = createTestCourseControl(2, courseLong, e2control101);
+		CourseControl courseControlCourseLong3 = createTestCourseControl(3, courseLong, e2control102);
 
 		Ecard ecard1 = createTestECard("123456");
 		Ecard ecard2 = createTestECard("900004");
@@ -129,8 +134,12 @@ public class TestDataService extends AbstractDatabaseService {
 		Runner runner2 = createTestRunner("Hubmann", "Daniel", ecard2);
 		
 		createTestRace(runner1, event1he);
-		createTestRace(runner1, event2he);
+		Race race12 = createTestRace(runner1, event2he);
 		createTestRace(runner2, event1de);
+		
+		createTestRaceControl(race12, courseControlCourseLong1, 1);
+		createTestRaceControl(race12, courseControlCourseLong2, 2);
+		createTestRaceControl(race12, courseControlCourseLong3, 3);
 		
 		// create default settings
 		Settings settings = new Settings();
@@ -206,6 +215,15 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	private Race createTestRace(Runner runner, EventClazz eventClazz) {
 		return entryDatabaseService.createEntryWithRace(runner.getKey(), eventClazz.getKey());
+	}
+	
+	private RaceControl createTestRaceControl(Race race, CourseControl courseControl, long sortOrder) {
+		RaceControl raceControl = new RaceControl();
+		raceControl.setRace(race);
+		raceControl.setCourseControl(courseControl);
+		raceControl.setSortOrder(sortOrder);
+		raceControlDatabaseService.create(raceControl);
+		return raceControl;
 	}
 			
 }

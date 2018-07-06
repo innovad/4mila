@@ -210,6 +210,56 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "RaceControlForm",
+                    "title": "RaceControl",
+                    "url": "/raceControl",
+                    "formFieldList": [
+                        {
+                            "id":   "race",
+                            "type": "autocomplete",
+                            "name": "Race",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "raceKey",
+                            "required": true,
+                            "form": "RaceForm",
+                            "url": "/race",
+                            "width": 2
+                        },
+                        {
+                            "id":   "courseControl",
+                            "type": "autocomplete",
+                            "name": "Control",
+                            "wordSearchEnabled": true,
+                            "defaultKey": "courseControlKey",
+                            "required": true,
+                            "form": "CourseControlForm",
+                            "url": "/courseControl",
+                            "width": 2
+                        },
+                        {
+                            "id": "sortOrder",
+                            "type": "number",
+                            "min": 1,
+                            "max": 999999,
+                            "name": "SortOrder",
+                            "required": true,
+                            "width": 2
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
                     "id": "EntryForm",
                     "title": "Entry",
                     "url": "/entry",
@@ -945,6 +995,9 @@ export class GuiModel {
                             "color": "lime",
                             "search": true,
                             "url": "/raceControl",
+                            "form": {
+                                "form": "RaceControlForm"
+                            }
                         }
                     ]
                 },
