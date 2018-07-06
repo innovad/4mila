@@ -887,9 +887,22 @@ export class GuiModel {
                             "color": "lime",
                             "search": true,
                             "url": "/race",
-                            "form": {
-                                "form": "RaceForm"
-                            }
+                            "page": "racepage"
+                        }
+                    ]
+                },
+                {
+                    "id": "racepage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-pin",
+                            "color": "lime",
+                            "search": true,
+                            "url": "/raceControl",
                         }
                     ]
                 },
