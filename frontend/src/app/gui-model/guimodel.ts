@@ -167,7 +167,7 @@ export class GuiModel {
                             "id": "status",
                             "type": "RadioGroupField",
                             "name": "Status",
-                            "alignment": "vertical",
+                            "alignment": "horizontal",
                             "width": 2,
                             "radios": [{
                                 type: "radio",
