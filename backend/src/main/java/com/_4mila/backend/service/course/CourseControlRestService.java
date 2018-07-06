@@ -10,7 +10,7 @@ import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class CourseControlRestService extends AbstractCrudRestService<CourseControl, Long> {
+public class CourseControlRestService extends AbstractCrudRestService<CourseControl, Long, CourseControlDatabaseService> {
 
 	@Inject
 	CourseDatabaseService courseDatabaseService;

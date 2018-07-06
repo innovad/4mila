@@ -5,7 +5,7 @@ import com._4mila.backend.service.AbstractCrudRestService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class RunnerRestService extends AbstractCrudRestService<Clazz, Long> {
+public class RunnerRestService extends AbstractCrudRestService<Clazz, Long, RunnerDatabaseService> {
 
 	@Inject
 	public RunnerRestService(Injector injector) {

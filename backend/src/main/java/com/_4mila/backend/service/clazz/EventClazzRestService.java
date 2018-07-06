@@ -14,7 +14,7 @@ import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class EventClazzRestService extends AbstractCrudRestService<EventClazz, Long> {
+public class EventClazzRestService extends AbstractCrudRestService<EventClazz, Long, EventClazzDatabaseService> {
 
 	@Inject
 	EventDatabaseService eventDatabaseService;

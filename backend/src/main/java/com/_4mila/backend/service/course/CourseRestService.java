@@ -13,7 +13,7 @@ import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class CourseRestService extends AbstractCrudRestService<Course, Long> {
+public class CourseRestService extends AbstractCrudRestService<Course, Long, CourseDatabaseService> {
 
 	@Inject
 	EventDatabaseService eventDatabaseService;

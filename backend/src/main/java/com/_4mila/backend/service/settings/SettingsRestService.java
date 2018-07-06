@@ -5,7 +5,7 @@ import com._4mila.backend.service.AbstractCrudRestService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class SettingsRestService extends AbstractCrudRestService<Settings, Long> {
+public class SettingsRestService extends AbstractCrudRestService<Settings, Long, SettingsDatabaseService> {
 
 	@Inject
 	public SettingsRestService(Injector injector) {

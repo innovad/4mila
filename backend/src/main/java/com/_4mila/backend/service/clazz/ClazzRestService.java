@@ -5,7 +5,7 @@ import com._4mila.backend.service.AbstractCrudRestService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class ClazzRestService extends AbstractCrudRestService<Clazz, Long> {
+public class ClazzRestService extends AbstractCrudRestService<Clazz, Long, ClazzDatabaseService> {
 
 	@Inject
 	public ClazzRestService(Injector injector) {

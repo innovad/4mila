@@ -29,7 +29,7 @@ import com.google.gson.reflect.TypeToken;
 
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
 
-	private AbstractCrudRestService<E, KEYTYPE> service;
+	private AbstractCrudRestService<E, KEYTYPE, ?> service;
 
 	private int port = 4568;
 
@@ -50,7 +50,7 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		}
 		port(port);
 
-		service = (AbstractCrudRestService<E, KEYTYPE>) getInjector().getInstance(getService());
+		service = (AbstractCrudRestService<E, KEYTYPE, ?>) getInjector().getInstance(getService());
 		service.init();
 		awaitInitialization();
 	}

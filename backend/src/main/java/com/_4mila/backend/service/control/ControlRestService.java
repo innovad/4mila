@@ -13,7 +13,7 @@ import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class ControlRestService extends AbstractCrudRestService<Control, Long> {
+public class ControlRestService extends AbstractCrudRestService<Control, Long, ControlDatabaseService> {
 
 	@Inject
 	EventDatabaseService eventDatabaseService;

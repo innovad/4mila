@@ -10,6 +10,7 @@ import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.ecard.Ecard;
 import com._4mila.backend.model.event.Event;
+import com._4mila.backend.model.race.Race;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.model.settings.Settings;
 import com._4mila.backend.service.AbstractDatabaseService;
@@ -19,7 +20,9 @@ import com._4mila.backend.service.control.ControlDatabaseService;
 import com._4mila.backend.service.course.CourseControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.ecard.EcardDatabaseService;
+import com._4mila.backend.service.entry.EntryDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
+import com._4mila.backend.service.race.RaceDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com._4mila.backend.service.settings.SettingsDatabaseService;
 import com.google.inject.Inject;
@@ -55,6 +58,12 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	EcardDatabaseService eCardDatabaseService;
+	
+	@Inject
+	EntryDatabaseService entryDatabaseService;
+	
+	@Inject
+	RaceDatabaseService raceDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -90,9 +99,9 @@ public class TestDataService extends AbstractDatabaseService {
 		Clazz h20 = createTestClass("H20");
 		Clazz d20 = createTestClass("D20");
 		
-		createTestEventClass(event1, he, courseA);
-		createTestEventClass(event1, de, courseB);
-		createTestEventClass(event2, he, courseLong);
+		EventClazz event1he = createTestEventClass(event1, he, courseA);
+		EventClazz event1de = createTestEventClass(event1, de, courseB);
+		EventClazz event2he = createTestEventClass(event2, he, courseLong);
 		createTestEventClass(event2, de, courseLong);
 		createTestEventClass(event2, h20, courseShort);
 		createTestEventClass(event2, d20, courseShort);
@@ -116,8 +125,12 @@ public class TestDataService extends AbstractDatabaseService {
 		Ecard ecard1 = createTestECard("123456");
 		Ecard ecard2 = createTestECard("900004");
 		
-		createTestRunner("Niggli-Luder", "Simone", ecard1);
-		createTestRunner("Hubmann", "Daniel", ecard2);
+		Runner runner1 = createTestRunner("Niggli-Luder", "Simone", ecard1);
+		Runner runner2 = createTestRunner("Hubmann", "Daniel", ecard2);
+		
+		createTestRace(runner1, event1he);
+		createTestRace(runner1, event2he);
+		createTestRace(runner2, event1de);
 		
 		// create default settings
 		Settings settings = new Settings();
@@ -190,5 +203,9 @@ public class TestDataService extends AbstractDatabaseService {
 		eCardDatabaseService.create(ecard);
 		return ecard;
 	}
-		
+	
+	private Race createTestRace(Runner runner, EventClazz eventClazz) {
+		return entryDatabaseService.createEntryWithRace(runner.getKey(), eventClazz.getKey());
+	}
+			
 }

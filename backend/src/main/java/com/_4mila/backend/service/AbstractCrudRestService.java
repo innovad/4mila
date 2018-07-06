@@ -20,7 +20,7 @@ import com.google.common.primitives.Longs;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public abstract class AbstractCrudRestService<ENTITY, KEYTYPE> extends AbstractRestService<AbstractCrudDatabaseService<ENTITY, KEYTYPE>> {
+public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> extends AbstractRestService<AbstractCrudDatabaseService<ENTITY, KEYTYPE>> {
 
 	@Inject
 	JsonHelper jsonHelper;
@@ -29,7 +29,7 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE> extends AbstractR
 	private String jsonEntityName;
 
 	@SuppressWarnings("unchecked")
-	public AbstractCrudRestService(Injector injector, Class<?> databaseServiceClass) {
+	public AbstractCrudRestService(Injector injector, Class<DATABASESERIVCE> databaseServiceClass) {
 		super(injector, (Class<AbstractCrudDatabaseService<ENTITY, KEYTYPE>>) databaseServiceClass);
 	}
 
@@ -114,8 +114,8 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE> extends AbstractR
 	}
 
 	@SuppressWarnings("unchecked")
-	public ENTITY getCrudDatabaseService() {
-		return (ENTITY) super.getDatabaseService();
+	public DATABASESERIVCE getCrudDatabaseService() {
+		return (DATABASESERIVCE) super.getDatabaseService();
 	}
 					
 	@SuppressWarnings("unchecked")
