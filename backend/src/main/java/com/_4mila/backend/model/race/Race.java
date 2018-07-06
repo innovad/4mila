@@ -1,9 +1,13 @@
 package com._4mila.backend.model.race;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com._4mila.backend.model.AbstractEntity;
 import com._4mila.backend.model.clazz.EventClazz;
@@ -26,8 +30,15 @@ public class Race extends AbstractEntity implements Comparable<Race> {
 	@ManyToOne
 	private Ecard ecard;
 	
+	@OneToMany (mappedBy = "race")
+	private Set<RaceControl> raceControls = new HashSet<>();
+	
 	@Enumerated(EnumType.STRING)
     private RaceStatus status;
+	
+	public Set<RaceControl> getRaceControls() {
+		return raceControls;
+	}
 	
 	public EventClazz getEventClazz() {
 		return eventClazz;

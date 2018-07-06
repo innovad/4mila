@@ -1022,7 +1022,7 @@ export class GuiModel {
                             "icon": "fa-pin",
                             "color": "lime",
                             "search": true,
-                            "url": "/raceControl",
+                            "url": "/race/:raceKey/raceControl",
                             "form": {
                                 "form": "RaceControlForm"
                             }
