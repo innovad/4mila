@@ -10,6 +10,7 @@
 		<class>com._4mila.backend.model.course.CourseControl</class>
 		<class>com._4mila.backend.model.runner.Runner</class>
 		<class>com._4mila.backend.model.race.Race</class>
+		<class>com._4mila.backend.model.race.RaceControl</class>
 		<class>com._4mila.backend.model.settings.Settings</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

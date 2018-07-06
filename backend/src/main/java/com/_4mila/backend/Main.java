@@ -30,6 +30,7 @@ import com._4mila.backend.service.entry.EntryRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
 import com._4mila.backend.service.language.LanguageUtility;
+import com._4mila.backend.service.race.RaceControlRestService;
 import com._4mila.backend.service.race.RaceRestService;
 import com._4mila.backend.service.runner.RunnerRestService;
 import com._4mila.backend.service.settings.SettingsRestService;
@@ -94,6 +95,7 @@ public class Main {
 		injector.getInstance(EntryRestService.class).init();
 		injector.getInstance(RaceRestService.class).init();
 		injector.getInstance(EcardRestService.class).init();
+		injector.getInstance(RaceControlRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();
