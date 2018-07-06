@@ -9,6 +9,7 @@ import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.model.entry.Entry;
 import com._4mila.backend.model.entry.Entry_;
 import com._4mila.backend.model.race.Race;
+import com._4mila.backend.model.race.RaceStatus;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.service.AbstractCrudDatabaseService;
 import com._4mila.backend.service.PathListEntry;
@@ -59,6 +60,7 @@ public class EntryDatabaseService extends AbstractCrudDatabaseService<Entry, Lon
 		race.setEventClazz(eventClazz);
 		race.setRunner(runner);
 		race.setEcard(runner.getDefaultEcard());
+		race.setStatus(RaceStatus.DidNotStart);
 		raceDatabaseService.create(race);
 		return race;
 	}

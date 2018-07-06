@@ -164,6 +164,38 @@ export class GuiModel {
                             "width": 2
                         },
                         {
+                            "id": "status",
+                            "type": "RadioGroupField",
+                            "name": "Status",
+                            "alignment": "vertical",
+                            "width": 2,
+                            "radios": [{
+                                type: "radio",
+                                name: "Ok",
+                                key: "Ok"
+                            }, {
+                                type: "radio",
+                                name: "DidNotFinish",
+                                key: "DidNotFinish"
+                            }, {
+                                type: "radio",
+                                name: "DidNotStart",
+                                key: "DidNotStart"
+                            }, {
+                                type: "radio",
+                                name: "NoStartTime",
+                                key: "NoStartTime"
+                            }, {
+                                type: "radio",
+                                name: "MissingPunch",
+                                key: "MissingPunch"
+                            }, {
+                                type: "radio",
+                                name: "Disqualified",
+                                key: "Disqualified"
+                            }]
+                        },
+                        {
                             "type": "deleteButton",
                             "name": "Delete"
                         },
@@ -883,7 +915,7 @@ export class GuiModel {
                         },
                         {
                             "type": "list",
-                            "icon": "fa-users",
+                            "icon": "fa-space-shuttle",
                             "color": "lime",
                             "search": true,
                             "url": "/race",
@@ -896,6 +928,16 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "EditRace",
+                            "width": 2,
+                            "icon": "fa-space-shuttle",
+                            "color": "green",
+                            "form": {
+                                "form": "RaceForm"
+                            }
                         },
                         {
                             "type": "list",

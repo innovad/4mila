@@ -39,6 +39,7 @@ export class _4milaTranslationService extends TranslationService {
             "Entry": "Entry",
             "EditCourse": "Edit Course",
             "EditEvent": "Edit Event",
+            "EditRace": "Edit Race",
             "Event": "Event",
             "Events": "Events",
             "FamilyName": "Family Name",
@@ -58,7 +59,8 @@ export class _4milaTranslationService extends TranslationService {
             "Results": "Results",
             "Runner": "Runner",
             "Runners": "Runners",
-            "SortOrder": "Sort Order"
+            "SortOrder": "Sort Order",
+            "Status": "Status"
         }
     }
 }

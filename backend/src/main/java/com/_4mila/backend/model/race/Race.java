@@ -1,6 +1,8 @@
 package com._4mila.backend.model.race;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 import com._4mila.backend.model.AbstractEntity;
@@ -23,6 +25,9 @@ public class Race extends AbstractEntity implements Comparable<Race> {
 
 	@ManyToOne
 	private Ecard ecard;
+	
+	@Enumerated(EnumType.STRING)
+    private RaceStatus status;
 	
 	public EventClazz getEventClazz() {
 		return eventClazz;
@@ -54,6 +59,14 @@ public class Race extends AbstractEntity implements Comparable<Race> {
 	
 	public void setEcard(Ecard ecard) {
 		this.ecard = ecard;
+	}
+	
+	public void setStatus(RaceStatus status) {
+		this.status = status;
+	}
+	
+	public RaceStatus getStatus() {
+		return status;
 	}
 	
 	@Override
