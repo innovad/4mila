@@ -1,5 +1,6 @@
 package com._4mila.backend.service.user;
 
+import static spark.Spark.after;
 import static spark.Spark.post;
 
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.persist.UnitOfWork;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import spark.Spark;
 
 public class UserRestService extends AbstractRestService<UserDatabaseService> {
@@ -48,6 +51,17 @@ public class UserRestService extends AbstractRestService<UserDatabaseService> {
 			}
 			return result;
 		}, getJsonTransformer());
+		
+		after("/services/*", (req, res) -> {
+			// if a response contains an jwt, then renew expiry date
+			if (!res.raw().containsHeader("Authorization")) {
+				Jws<Claims> jwt = JwtUtility.getJsonWebToken(req);
+				if (jwt != null) {
+					String jwtString = JwtUtility.createJsonWebToken(jwt.getBody().getSubject(), JwtUtility.getLanguage(jwt));
+					res.header("Authorization", jwtString);
+				}
+			}
+		});
 	}
 
 	private class CredentialView {
