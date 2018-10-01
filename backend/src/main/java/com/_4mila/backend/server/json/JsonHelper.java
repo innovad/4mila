@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.ManyToOne;
@@ -13,6 +14,7 @@ import javax.persistence.OneToOne;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com._4mila.backend.service.AbstractCrudDatabaseService;
 import com._4mila.backend.service.AbstractDatabaseService;
 import com._4mila.backend.service.PathListEntry.Key;
 import com._4mila.backend.service.exception.BackendValidationException;
@@ -49,16 +51,31 @@ public class JsonHelper {
 					AbstractDatabaseService foreignKeyServiceInstance = (AbstractDatabaseService) injector.getInstance(foreignKeyService);
 					Method getMethod = foreignKeyServiceInstance.getClass().getMethod("read", Object.class);
 
-					// parse foreign key long value
+					// get type of key field
+					List<Field> foreignKeyClassFields = ReflectionUtility.getAllFields(((AbstractCrudDatabaseService<?, ?>) foreignKeyServiceInstance).getEntityClass());
+					Field foreignKeyClassField = null;
+					for (Field currentField : foreignKeyClassFields) {
+						if (currentField.getName().equals("key")) {
+							foreignKeyClassField = currentField;
+							break;
+						}
+					}
+					if (foreignKeyClassField == null) {
+						throw new RuntimeException("no key field found on type " + field.getName());
+					}
+
+					// parse foreign key value
 					JsonParser parser = new JsonParser();
 					JsonObject obj = parser.parse(json).getAsJsonObject();
 					JsonElement jsonElement = obj.get(field.getName());
 					Object fieldValue = null;
 					if (jsonElement != null && !(jsonElement instanceof JsonNull)) {
-						String fieldValueString = jsonElement.getAsString();
-						fieldValue = Longs.tryParse(fieldValueString);
-						if (fieldValue == null) {
-							fieldValue = fieldValueString;
+						if (String.class.isAssignableFrom(foreignKeyClassField.getType())) {
+							fieldValue = jsonElement.getAsString();
+						} else if (Enum.class.isAssignableFrom(foreignKeyClassField.getType())) {
+							fieldValue = parseEnum(foreignKeyClassField, jsonElement.getAsString());
+						} else if (Number.class.isAssignableFrom(foreignKeyClassField.getType())) {
+							fieldValue = Longs.tryParse(jsonElement.getAsString());
 						}
 					}
 
@@ -77,9 +94,9 @@ public class JsonHelper {
 		try {
 			object = gson.fromJson(json, classOfC);
 		} catch (JsonSyntaxException e) {
-			logger.error("BackendFormatError", e);
 			BackendValidationException backendValidationException = new BackendValidationException("BackendFormatError");
 			backendValidationException.getParameters().add(e.getMessage());
+			logger.error("BackendFormatError", e);
 			throw backendValidationException;
 		}
 		for (Field field : foreignObjects.keySet()) {
@@ -100,6 +117,14 @@ public class JsonHelper {
 			}
 		}
 		return object;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Object parseEnum(Field enumField, String value) {
+		Object fieldValue;
+		Class<? extends Enum> enumType = (Class<? extends Enum>) enumField.getType();
+		fieldValue = Enum.valueOf(enumType, value);
+		return fieldValue;
 	}
 
 	public Gson getGson() {
