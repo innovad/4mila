@@ -8,7 +8,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2016", "DOM"
-    ]
+      "es2016",
+      "DOM"
+    ],
+    "module": "es2015",
+    "baseUrl": "./"
   }
 }
