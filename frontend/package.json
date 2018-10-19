@@ -19,11 +19,10 @@
     "npm": "5.4.2"
   },
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run lint && ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "tslint --project .",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build"
   },
