@@ -20,6 +20,24 @@ export class _4milaAppComponent extends PathAppComponent {
 
     constructor(pathService: PathService, translationService: TranslationService) {
         super(pathService, translationService);
+
+        // Use WebSockets to handle events at ECard download station
+        let webSocketUrl = this.getBackendUrl().replace("https", "wss");
+        webSocketUrl = this.getBackendUrl().replace("http", "ws");
+        webSocketUrl += "/websocket";
+        const webSocket = new WebSocket(webSocketUrl, "ECardInsert");
+
+        const app = this;
+        webSocket.onmessage = function (event) {
+            console.log("WebSocket Message from Server" + event.data);
+            if (event.data === "download") {
+                app.setCurrentPage("DownloadResultsPage", null);
+            } else if (event.data === "registrationWithDB") {
+                app.setCurrentPage("AddEntryPage", null);
+            } else if (event.data === "registrationNewRunner") {
+                app.setCurrentPage("AddEntryClassPage", null);
+            }
+        };
     }
 
     protected getFrontendVersion(): string {

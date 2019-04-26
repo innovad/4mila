@@ -26,6 +26,8 @@ import com._4mila.backend.service.control.ControlRestService;
 import com._4mila.backend.service.course.CourseControlRestService;
 import com._4mila.backend.service.course.CourseRestService;
 import com._4mila.backend.service.ecard.EcardRestService;
+import com._4mila.backend.service.ecard.websocket.DownloadStationApiWebSocketService;
+import com._4mila.backend.service.ecard.websocket.DownloadStationApiRestService;
 import com._4mila.backend.service.entry.EntryRestService;
 import com._4mila.backend.service.event.EventRestService;
 import com._4mila.backend.service.exception.ExceptionRestService;
@@ -53,10 +55,16 @@ public class Main {
 	private static Injector injector;
 
 	public static void main(String[] args) {
-		initFrontend();
+		// Guice and Database
 		initDatabase();
-		initServer();
 
+		// WebSockets
+		injector.getInstance(DownloadStationApiWebSocketService.class).init();
+
+		// Init
+		initFrontend();
+		initServer();
+		
 		// Cache
 		before((request, response) -> {
 			response.header("cache-control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
@@ -106,6 +114,7 @@ public class Main {
 		injector.getInstance(UserRestService.class).init();
 		injector.getInstance(PermissionRoleRestService.class).init();
 		injector.getInstance(PermissionFunctionRestService.class).init();
+		injector.getInstance(DownloadStationApiRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

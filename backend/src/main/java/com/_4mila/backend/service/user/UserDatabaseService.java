@@ -113,7 +113,7 @@ public class UserDatabaseService extends AbstractCrudDatabaseService<User, Long>
 	}
 
 	public boolean validateCredentials(String email, String password) {
-		List<User> users = this.list(new EMailFilter(email));
+		List<User> users = this.list(new UsernameFilter(email));
 		if (users.size() == 1) {
 			User user = users.get(0);
 			if (!isActiveUser(user)) {
@@ -131,7 +131,7 @@ public class UserDatabaseService extends AbstractCrudDatabaseService<User, Long>
 			throw new BackendValidationException("NotLoggedInErrorMessage");
 		}
 		String userId = jwt.getBody().getSubject();
-		List<User> users = list(new EMailFilter(userId));
+		List<User> users = list(new UsernameFilter(userId));
 		if (users.size() != 1) {
 			throw new RuntimeException("No current user found");
 		}
@@ -172,10 +172,10 @@ public class UserDatabaseService extends AbstractCrudDatabaseService<User, Long>
 		throw new BackendValidationException("NoPermissionError");
 	}
 
-	public class EMailFilter extends AbstractCrudDatabaseService<User, Long>.AbstractListFilter {
+	public class UsernameFilter extends AbstractCrudDatabaseService<User, Long>.AbstractListFilter {
 		private String email;
 
-		public EMailFilter(String email) {
+		public UsernameFilter(String email) {
 			super();
 			this.email = email;
 		}
