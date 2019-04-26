@@ -30,12 +30,16 @@ export class _4milaAppComponent extends PathAppComponent {
         const app = this;
         webSocket.onmessage = function (event) {
             console.log("WebSocket Message from Server" + event.data);
-            if (event.data === "download") {
-                app.setCurrentPage("DownloadResultsPage", null);
-            } else if (event.data === "registrationWithDB") {
-                app.setCurrentPage("AddEntryPage", null);
-            } else if (event.data === "registrationNewRunner") {
-                app.setCurrentPage("AddEntryClassPage", null);
+            if (app["_pageStack"].length === 1) {
+                if (event.data === "download") {
+                    app.setCurrentPage("DownloadResultsPage", null);
+                } else if (event.data === "registrationWithDB") {
+                    app.setCurrentPage("AddEntryPage", null);
+                } else if (event.data === "registrationNewRunner") {
+                    app.setCurrentPage("AddEntryClassPage", null);
+                }
+            } else {
+                console.log("Ignored, not on start page");
             }
         };
     }
