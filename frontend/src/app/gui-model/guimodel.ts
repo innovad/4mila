@@ -521,22 +521,42 @@ export class GuiModel {
                     "name": "MainMenu",
                     "elementList": [
                         {
+                            "type": "pageLabel",
+                            "value": "<h3>Welcome! Please insert your E-Card to register or download!</h3>",
+                            "newRow": true
+                        },
+                        {
                             "type": "button",
-                            "name": "Entry",
+                            "name": "InsertEcard",
+                            "icon": "fa-tag",
+                            "color": "green",
+                            "width": 4,
+                        },
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Browse entries or results:</h3>",
+                            "newRow": true
+                        },
+                        {
+                            "type": "button",
+                            "name": "BrowseEntries",
                             "icon": "fa-address-card",
                             "color": "carrot",
-                            "page": "entriespage",
-                            "tooltip": "NotYetImplemented",
+                            "page": "EntriesPage",
                             "width": 2,
                         },
                         {
                             "type": "button",
-                            "name": "Results",
+                            "name": "BrowseResults",
                             "icon": "fa-list-ol",
-                            "color": "pomegranate",
+                            "color": "blue",
                             "page": "resultspage",
-                            "tooltip": "NotYetImplemented",
                             "width": 2,
+                        },
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Admin and Test features</h3>",
+                            "newRow": true
                         },
                         {
                             "type": "button",
@@ -544,15 +564,73 @@ export class GuiModel {
                             "icon": "fa-cog",
                             "color": "concrete",
                             "page": "adminpage",
+                            "permissionUrl": "/permission/isAdmin",
+                        },
+                        {
+                            "type": "button",
+                            "name": "TestDownload",
+                            "icon": "fa-tag",
+                            "color": "silver",
+                            "page": "DownloadResultsPage",
+                            "width": 1,
+                        },
+                        {
+                            "type": "button",
+                            "name": "TestEntryPersonDatabase",
+                            "icon": "fa-tag",
+                            "color": "silver",
+                            "page": "AddEntryClassPage",
+                            "width": 1,
+                        },
+                        {
+                            "type": "button",
+                            "name": "TestEntryNewPerson",
+                            "icon": "fa-tag",
+                            "color": "silver",
+                            "page": "AddEntryPage",
+                            "width": 1,
                         },
                     ]
                 },
                 {
-                    "id": "entriespage",
+                    "id": "DownloadResultsPage",
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Please type your name (TODO: new entry or find existing entry)</h3>"
+                            "value": "<h3>Thank you Mr. XY! Your results have been downloaded:</h3>"
+                        },
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "button",
+                            "name": "Status: OK",
+                            "icon": "fa-tag",
+                            "color": "green",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Time: XX:YY",
+                            "icon": "fa-clock",
+                            "color": "green",
+                            "width": 2,
+                        },
+                        {
+                            "type": "button",
+                            "name": "Current Rank: 1/20",
+                            "icon": "fa-list-ol",
+                            "color": "green",
+                            "width": 2,
+                        },
+                    ]
+                },
+                {
+                    "id": "AddEntryPage",
+                    "elementList": [
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>Unknown E-Card. Please search the runner database:</h3>"
                         },
                         {
                             "type": "backbutton",
@@ -564,7 +642,7 @@ export class GuiModel {
                             "search": true,
                             "limit": 100,
                             "url": "/runner",
-                            "page": "entryclasspage"
+                            "page": "AddEntryClassPage"
                         },
                         {
                             "type": "pageLabel",
@@ -584,11 +662,11 @@ export class GuiModel {
                     ]
                 },
                 {
-                    "id": "entryclasspage",
+                    "id": "AddEntryClassPage",
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Please select a class</h3>"
+                            "value": "<h3>Welcome Mr. XY. Please select your class:</h3>"
                         },
                         {
                             "type": "backbutton",
@@ -599,12 +677,12 @@ export class GuiModel {
                             "color": "wet-asphalt",
                             "search": false,
                             "url": "/event/:eventKey/eventClazz",
-                            "page": "entryconfirmedpage"
+                            "page": "EntryConfirmedPage"
                         }
                     ]
                 },
                 {
-                    "id": "entryconfirmedpage",
+                    "id": "EntryConfirmedPage",
                     "elementList": [
                         {
                             "type": "pageLabel",
@@ -616,6 +694,24 @@ export class GuiModel {
                             "color": "green",
                             "search": false,
                             "url": "/entry/:entryKey/runner/:runnerKey/eventClazz/:eventClazzKey",
+                            "form": {
+                                "form": "RaceForm"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "EntriesPage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-thumbs-up",
+                            "color": "green",
+                            "search": false,
+                            "url": "/race",
                             "form": {
                                 "form": "RaceForm"
                             }
@@ -702,7 +798,7 @@ export class GuiModel {
                             "color": "wet-asphalt",
                             "page": "classespage",
                             "width": 2,
-                        },
+                        }
                     ]
                 },
                 {

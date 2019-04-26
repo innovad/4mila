@@ -29,6 +29,8 @@ export class _4milaTranslationService extends TranslationService {
             "AddControl": "Add Control",
             "All": "All",
             "Birthdate": "Birthdate",
+            "BrowseEntries": "Browse Entries",
+            "BrowseResults": "Browse Results",
             "Class": "Class",
             "Classes": "Classes",
             "Control": "Control",
@@ -46,6 +48,7 @@ export class _4milaTranslationService extends TranslationService {
             "FamilyName": "Family Name",
             "FirstName": "First Name",
             "ID": "ID",
+            "InsertEcard": "Please insert your E-Card",
             "Latest": "Latest",
             "Name": "Name",
             "NewEcard": "New E-Card",
@@ -61,7 +64,10 @@ export class _4milaTranslationService extends TranslationService {
             "Runner": "Runner",
             "Runners": "Runners",
             "SortOrder": "Sort Order",
-            "Status": "Status"
+            "Status": "Status",
+            "TestDownload": "Download",
+            "TestEntryPersonDatabase": "Entry DB",
+            "TestEntryNewPerson": "Entry New"
         };
     }
 }

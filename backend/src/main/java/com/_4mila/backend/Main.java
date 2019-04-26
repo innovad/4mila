@@ -35,6 +35,8 @@ import com._4mila.backend.service.race.RaceRestService;
 import com._4mila.backend.service.runner.RunnerRestService;
 import com._4mila.backend.service.settings.SettingsRestService;
 import com._4mila.backend.service.user.UserRestService;
+import com._4mila.backend.service.user.permission.PermissionFunctionRestService;
+import com._4mila.backend.service.user.permission.PermissionRoleRestService;
 import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -77,8 +79,13 @@ public class Main {
 			if (jwt != null) {
 				userId = jwt.getBody().getSubject();
 			}
-			String defaultUser = req.url().contains("localhost") ? "chat" : "";
-			String languageCode = LanguageUtility.getUserLanguage().getCode();
+			String defaultUser = "";
+			if (req.url().contains("localhost")) {
+				defaultUser = "admin";
+				String jwtString = JwtUtility.createJsonWebToken(defaultUser, "de");
+				res.header("Authorization", jwtString);
+			}
+			String languageCode = "de";
 			return "{ \"status\": \"ok\", \"userId\": \"" + (userId == null ? defaultUser : userId) + "\", \"languageCode\": \"" + languageCode + "\",\"version\": \"" + new Version().getVersion() + "\"}";
 		});
 
@@ -96,6 +103,9 @@ public class Main {
 		injector.getInstance(RaceRestService.class).init();
 		injector.getInstance(EcardRestService.class).init();
 		injector.getInstance(RaceControlRestService.class).init();
+		injector.getInstance(UserRestService.class).init();
+		injector.getInstance(PermissionRoleRestService.class).init();
+		injector.getInstance(PermissionFunctionRestService.class).init();
 
 		// Exception Handler
 		injector.getInstance(ExceptionRestService.class).init();

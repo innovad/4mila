@@ -1,5 +1,8 @@
 package com._4mila.backend.server.testdata;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +17,12 @@ import com._4mila.backend.model.race.Race;
 import com._4mila.backend.model.race.RaceControl;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.model.settings.Settings;
+import com._4mila.backend.model.user.User;
+import com._4mila.backend.model.user.permission.PermissionFunction;
+import com._4mila.backend.model.user.permission.PermissionFunctionEnum;
+import com._4mila.backend.model.user.permission.PermissionRole;
 import com._4mila.backend.service.AbstractDatabaseService;
+import com._4mila.backend.service.DateUtility;
 import com._4mila.backend.service.clazz.ClazzDatabaseService;
 import com._4mila.backend.service.clazz.EventClazzDatabaseService;
 import com._4mila.backend.service.control.ControlDatabaseService;
@@ -27,6 +35,9 @@ import com._4mila.backend.service.race.RaceControlDatabaseService;
 import com._4mila.backend.service.race.RaceDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com._4mila.backend.service.settings.SettingsDatabaseService;
+import com._4mila.backend.service.user.UserDatabaseService;
+import com._4mila.backend.service.user.permission.PermissionFunctionDatabaseService;
+import com._4mila.backend.service.user.permission.PermissionRoleDatabaseService;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -69,6 +80,15 @@ public class TestDataService extends AbstractDatabaseService {
 	
 	@Inject
 	RaceControlDatabaseService raceControlDatabaseService;
+	
+	@Inject
+	UserDatabaseService userDatabaseService;
+
+	@Inject
+	private PermissionRoleDatabaseService permissionRoleDatabaseService;
+
+	@Inject
+	private PermissionFunctionDatabaseService permissionFunctionDatabaseService;
 
 	@Transactional
 	public void create() {
@@ -145,6 +165,14 @@ public class TestDataService extends AbstractDatabaseService {
 		Settings settings = new Settings();
 		settings.setDefaultEvent(event1);
 		settingsDatabaseService.create(settings);
+		
+		// User Permissions
+		PermissionFunction administration = createDemoPermissionFunction(PermissionFunctionEnum.readAdministration, "Administration");
+		PermissionRole administratorRole = createDemoPermissionRole("Administrator", administration);
+
+		// Generic
+		createTestUser("user");
+		createTestUser("admin", administratorRole);
 		
 		logger.info("Test Data created.");
 	}
@@ -224,6 +252,33 @@ public class TestDataService extends AbstractDatabaseService {
 		raceControl.setSortOrder(sortOrder);
 		raceControlDatabaseService.create(raceControl);
 		return raceControl;
+	}
+	
+	private User createTestUser(String username, PermissionRole... permissionRoles) {
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(".");
+		user.setRepeatPassword(".");
+		user.setEvtCreationDate(DateUtility.truncateToDay(new Date()));
+		user.getPermissionRoles().addAll(Arrays.asList(permissionRoles));
+		userDatabaseService.create(user);
+		return user;
+	}
+
+	private PermissionFunction createDemoPermissionFunction(PermissionFunctionEnum key, String name) {
+		PermissionFunction function = new PermissionFunction();
+		function.setKey(key.name());
+		function.setName(name);
+		permissionFunctionDatabaseService.create(function);
+		return function;
+	}
+
+	private PermissionRole createDemoPermissionRole(String name, PermissionFunction... functions) {
+		PermissionRole role = new PermissionRole();
+		role.setName(name);
+		role.getPermissionFunctions().addAll(Arrays.asList(functions));
+		permissionRoleDatabaseService.create(role);
+		return role;
 	}
 			
 }
