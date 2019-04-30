@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com._4mila.backend.service.AbstractRestService;
 import com._4mila.backend.service.PathListEntry;
+import com._4mila.backend.service.course.iof2.xml.CourseData;
 import com._4mila.backend.service.exception.BackendValidationException;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -35,9 +36,10 @@ public class CourseImportRestService extends AbstractRestService<CourseImportDat
 			Part part = req.raw().getPart("upload");
 			try (InputStream is = part.getInputStream()) {
 				// Read file
-				part.getInputStream();
 				// TODO import here
+				CourseData root = XMLUtility.unmarshal(part.getInputStream(), new CourseData(), false);
 				logger.info("upload course");
+				logger.info("courses: " + root.getCourse().size());
 				
 			} catch (IOException e) {
 				logger.error("File upload failed", e);
