@@ -447,7 +447,7 @@ export class GuiModel {
                             "id": "fileUpload",
                             "type": "fileUpload",
                             "name": "File",
-                            "url": "/upload/course",
+                            "url": "/upload/event/:eventKey/course",
                             "multiple": false,
                             "acceptedFileTypes": [".xml"],
                             "width": 2,
