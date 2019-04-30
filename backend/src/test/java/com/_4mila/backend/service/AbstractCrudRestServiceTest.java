@@ -2,9 +2,11 @@ package com._4mila.backend.service;
 
 import static org.junit.Assert.assertEquals;
 import static spark.Spark.awaitInitialization;
+import static spark.Spark.awaitStop;
 import static spark.Spark.port;
 import static spark.Spark.stop;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -16,6 +18,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -57,19 +64,8 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 
 	@After
 	public void after() {
-		try {
-			stop();
-			while (true) {
-				try {
-					port();
-					Thread.sleep(500);
-				} catch (final IllegalStateException ignored) {
-					break;
-				}
-			}
-		} catch (final Exception ex) {
-			// Ignore
-		}
+		stop();
+		awaitStop();
 	}
 
 	@Test
@@ -94,7 +90,32 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpGet getRequest = new HttpGet("http://localhost:" + port + "/services/" + serviceName);
 		HttpResponse getResponse = httpClient.execute(getRequest);
+		assertEquals(200, getResponse.getStatusLine().getStatusCode());
 		HttpEntity getResponseEntity = getResponse.getEntity();
+		Reader reader = new InputStreamReader(getResponseEntity.getContent());
+
+		String jsonResult = CharStreams.toString(reader);
+		return jsonResult;
+	}
+
+	protected String testPost(String serviceName, String resource) throws IOException, ClientProtocolException {
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost postRequest = new HttpPost("http://localhost:" + port + "/services/" + serviceName);
+
+		if (resource != null) {
+			File file = new File(getClass().getClassLoader().getResource(resource).getFile());
+
+			FileBody fileBody = new FileBody(file, ContentType.DEFAULT_BINARY);
+			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+			builder.addPart("upload", fileBody);
+			HttpEntity entity = builder.build();
+			postRequest.setEntity(entity);
+		}
+
+		HttpResponse postResponse = httpClient.execute(postRequest);
+		assertEquals(200, postResponse.getStatusLine().getStatusCode());
+		HttpEntity getResponseEntity = postResponse.getEntity();
 		Reader reader = new InputStreamReader(getResponseEntity.getContent());
 
 		String jsonResult = CharStreams.toString(reader);

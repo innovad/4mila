@@ -1,7 +1,5 @@
 package com._4mila.backend.model.runner;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
@@ -16,8 +14,16 @@ public class Runner extends AbstractEntity implements Comparable<Runner> {
 
 	private String firstName;
 
-	private LocalDate birthDate;
+	private Integer yearOfBirth;
+
+	private String sex;
+
+	private String city;
+
+	private String email;
 	
+	private String id;
+
 	@ManyToOne
 	private Ecard defaultEcard;
 
@@ -37,27 +43,59 @@ public class Runner extends AbstractEntity implements Comparable<Runner> {
 		this.firstName = firstName;
 	}
 
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-	
 	public Ecard getDefaultEcard() {
 		return defaultEcard;
 	}
-	
+
 	public void setDefaultEcard(Ecard defaultEcard) {
 		this.defaultEcard = defaultEcard;
+	}
+
+	public Integer getYearOfBirth() {
+		return yearOfBirth;
+	}
+
+	public void setYearOfBirth(Integer yearOfBirth) {
+		this.yearOfBirth = yearOfBirth;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Transient
 	public String getName() {
 		return this.getFamilyName() + " " + this.getFirstName();
 	}
-	
+
 	@Override
 	public int compareTo(Runner o) {
 		int nameComparison = this.getFamilyName().compareTo(o.getFamilyName());

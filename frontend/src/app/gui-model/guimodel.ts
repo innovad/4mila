@@ -697,8 +697,10 @@ export class GuiModel {
                             "icon": "fa-user",
                             "color": "pink",
                             "search": true,
-                            "limit": 100,
-                            "url": "/runner",
+                            "searchRequired": true,
+                            "searchRequest": true,
+                            "limit": 10,
+                            "url": "/search/runner",
                             "page": "AddEntryClassPage"
                         },
                         {
