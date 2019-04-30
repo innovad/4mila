@@ -440,6 +440,30 @@ export class GuiModel {
                     ]
                 },
                 {
+                    "id": "CourseImportForm",
+                    "title": "Course",
+                    "formFieldList": [
+                        {
+                            "id": "fileUpload",
+                            "type": "fileUpload",
+                            "name": "File",
+                            "url": "/upload/course",
+                            "multiple": false,
+                            "acceptedFileTypes": [".xml"],
+                            "width": 2,
+                            "required": true
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
                     "id": "CourseControlForm",
                     "title": "Control",
                     "url": "/courseControl",
@@ -991,6 +1015,16 @@ export class GuiModel {
                             "color": "green",
                             "form": {
                                 "form": "CourseForm"
+                            }
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "Import",
+                            "width": 2,
+                            "icon": "fa-file-import",
+                            "color": "green",
+                            "form": {
+                                "form": "CourseImportForm"
                             }
                         },
                         {

@@ -25,6 +25,7 @@ import com._4mila.backend.service.clazz.EventClazzRestService;
 import com._4mila.backend.service.control.ControlRestService;
 import com._4mila.backend.service.course.CourseControlRestService;
 import com._4mila.backend.service.course.CourseRestService;
+import com._4mila.backend.service.course.iof2.CourseImportRestService;
 import com._4mila.backend.service.ecard.EcardRestService;
 import com._4mila.backend.service.ecard.websocket.DownloadStationApiRestService;
 import com._4mila.backend.service.ecard.websocket.DownloadStationApiWebSocketService;
@@ -103,6 +104,7 @@ public class Main {
 		injector.getInstance(EventRestService.class).init();
 		injector.getInstance(ControlRestService.class).init();
 		injector.getInstance(CourseRestService.class).init();
+		injector.getInstance(CourseImportRestService.class).init();
 		injector.getInstance(ClazzRestService.class).init();
 		injector.getInstance(EventClazzRestService.class).init();
 		injector.getInstance(CourseControlRestService.class).init();
