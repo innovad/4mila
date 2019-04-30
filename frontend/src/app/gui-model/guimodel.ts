@@ -58,12 +58,6 @@ export class GuiModel {
                             "required": true
                         },
                         {
-                            "id": "birthDate",
-                            "type": "date",
-                            "name": "Birthdate",
-                            "required": false
-                        },
-                        {
                             "id":   "defaultEcard",
                             "type": "autocomplete",
                             "name": "Ecard",
@@ -71,12 +65,75 @@ export class GuiModel {
                             "defaultKey": "ecardKey",
                             "required": true,
                             "form": "EcardForm",
-                            "url": "/ecard",
-                            "width": 2
+                            "url": "/ecard"
+                        },
+                        {
+                            "id": "city",
+                            "type": "text",
+                            "name": "City",
+                            "required": false
+                        },
+                        {
+                            "id": "email",
+                            "type": "text",
+                            "name": "Email",
+                            "required": false
+                        },
+                        {
+                            "id": "id",
+                            "type": "text",
+                            "name": "ID",
+                            "required": false
+                        },
+                        {
+                            "id": "yearOfBirth",
+                            "type": "number",
+                            "name": "YearOfBirth",
+                            "required": false
+                        },
+                        {
+                            "id": "sex",
+                            "type": "RadioGroupField",
+                            "name": "Sex",
+                            "alignment": "horizontal",
+                            "width": 1,
+                            "radios": [{
+                                type: "radio",
+                                name: "Male",
+                                key: "m"
+                            }, {
+                                type: "radio",
+                                name: "Female",
+                                key: "f"
+                            }]
                         },
                         {
                             "type": "deleteButton",
                             "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+                {
+                    "id": "RunnerImportForm",
+                    "title": "Runner",
+                    "formFieldList": [
+                        {
+                            "id": "fileUpload",
+                            "type": "fileUpload",
+                            "name": "File",
+                            "url": "/upload",
+                            "multiple": false,
+                            "acceptedFileTypes": [".csv", ".txt"],
+                            "width": 2,
+                            "required": true
                         },
                         {
                             "type": "cancelButton",
@@ -1012,12 +1069,24 @@ export class GuiModel {
                             }
                         },
                         {
+                            "type": "newButton",
+                            "name": "Import",
+                            "width": 2,
+                            "icon": "fa-file-import",
+                            "color": "green",
+                            "form": {
+                                "form": "RunnerImportForm"
+                            }
+                        },
+                        {
                             "type": "list",
                             "icon": "fa-user",
                             "color": "pink",
                             "search": true,
-                            "limit": 100,
-                            "url": "/runner",
+                            "searchRequired": true,
+                            "searchRequest": true,
+                            "limit": 10,
+                            "url": "/search/runner",
                             "form": {
                                 "form": "RunnerForm"
                             }

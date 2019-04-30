@@ -58,11 +58,13 @@ dependencies {
 	compile 'com.google.inject.extensions:guice-persist:4.2.1'
 	compile 'io.jsonwebtoken:jjwt:0.6.0'
 	compile 'com.google.guava:guava:26.0-jre'
+	compile 'org.apache.commons:commons-csv:1.6'
 	
 	compile 'org.postgresql:postgresql:42.1.4'
 	
     testCompile 'junit:junit:4.12'
-    testCompile 'org.apache.httpcomponents:httpclient:4.5.2'
+    testCompile 'org.apache.httpcomponents:httpclient:4.5.8'
+    testCompile 'org.apache.httpcomponents:httpmime:4.5.8'
 }
 
 configurations.all {
