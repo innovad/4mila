@@ -724,8 +724,8 @@ export class GuiModel {
                     "id": "AddEntryClassPage",
                     "elementList": [
                         {
-                            "type": "pageLabel",
-                            "value": "<h3>Welcome Mr. XY. Please select your class:</h3>"
+                            "type": "elementList",
+                            "url": "/message/runner/:runnerKey",
                         },
                         {
                             "type": "backbutton",
