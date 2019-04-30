@@ -2,6 +2,7 @@
 
 ### Core Features
 * Entry with new runner
+* Lucene Search for runners
 * Modify entry
 * Replacement controls
 * SportIdent download and split time print
