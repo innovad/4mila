@@ -6,6 +6,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
 import com._4mila.backend.model.clazz.EventClazz;
+import com._4mila.backend.model.ecard.Ecard;
 import com._4mila.backend.model.entry.Entry;
 import com._4mila.backend.model.entry.Entry_;
 import com._4mila.backend.model.race.Race;
@@ -14,6 +15,7 @@ import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.service.AbstractCrudDatabaseService;
 import com._4mila.backend.service.PathListEntry;
 import com._4mila.backend.service.clazz.EventClazzDatabaseService;
+import com._4mila.backend.service.ecard.EcardDatabaseService;
 import com._4mila.backend.service.race.RaceDatabaseService;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com.google.inject.Inject;
@@ -28,6 +30,9 @@ public class EntryDatabaseService extends AbstractCrudDatabaseService<Entry, Lon
 	
 	@Inject
 	EventClazzDatabaseService eventClazzDatabaseService;
+	
+	@Inject
+	EcardDatabaseService ecardDatabaseService;
 	
 	@Override
 	public Class<Entry> getEntityClass() {
@@ -45,7 +50,7 @@ public class EntryDatabaseService extends AbstractCrudDatabaseService<Entry, Lon
 		orderList.add(getCriteriaBuilder().asc(root.get(Entry_.key)));
 	}
 	
-	public Race createEntryWithRace(Long runnerKey, Long eventClazzKey) {
+	public Race createEntryWithRace(Long ecardKey, Long runnerKey, Long eventClazzKey) {
 		if (runnerKey == null || eventClazzKey == null) {
 			throw new IllegalArgumentException("runner and eventClass key required");
 		}
@@ -53,13 +58,17 @@ public class EntryDatabaseService extends AbstractCrudDatabaseService<Entry, Lon
 		entry = create(entry);
 		
 		Runner runner = runnerDatabaseService.read(runnerKey);
-		EventClazz eventClazz = eventClazzDatabaseService.read(eventClazzKey);	
+		EventClazz eventClazz = eventClazzDatabaseService.read(eventClazzKey);
+		Ecard ecard = runner.getDefaultEcard();
+		if (ecardKey != null) {
+			ecard = ecardDatabaseService.read(ecardKey);
+		}
 		
 		Race race = new Race();
 		race.setEntry(entry);
 		race.setEventClazz(eventClazz);
 		race.setRunner(runner);
-		race.setEcard(runner.getDefaultEcard());
+		race.setEcard(ecard);
 		race.setStatus(RaceStatus.DidNotStart);
 		raceDatabaseService.create(race);
 		return race;

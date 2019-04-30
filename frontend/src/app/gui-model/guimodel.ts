@@ -625,28 +625,43 @@ export class GuiModel {
                         },
                         {
                             "type": "button",
-                            "name": "TestDownload",
+                            "name": "TestECard",
                             "icon": "fa-tag",
                             "color": "silver",
-                            "page": "DownloadResultsPage",
-                            "width": 1,
+                            "page": "TestECardPage",
+                            "width": 2,
+                        },
+                    ]
+                },
+                {
+                    "id": "TestECardPage",
+                    "elementList": [
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>ECard without runner:</h3>"
                         },
                         {
-                            "type": "button",
-                            "name": "TestEntryPersonDatabase",
+                            "type": "list",
                             "icon": "fa-tag",
-                            "color": "silver",
-                            "page": "AddEntryClassPage",
-                            "width": 1,
-                        },
-                        {
-                            "type": "button",
-                            "name": "TestEntryNewPerson",
-                            "icon": "fa-tag",
-                            "color": "silver",
+                            "color": "green",
+                            "search": true,
+                            "url": "/ecard/withoutRunner",
                             "page": "AddEntryPage",
-                            "width": 1,
+                            "newRow": true,
                         },
+                        {
+                            "type": "pageLabel",
+                            "value": "<h3>ECard with runner:</h3>",
+                            "newRow": true,
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-tag",
+                            "color": "green",
+                            "search": true,
+                            "url": "/runner/withECard",
+                            "page": "AddEntryClassPage",
+                        }
                     ]
                 },
                 {
@@ -752,7 +767,7 @@ export class GuiModel {
                             "icon": "fa-thumbs-up",
                             "color": "green",
                             "search": false,
-                            "url": "/entry/:entryKey/runner/:runnerKey/eventClazz/:eventClazzKey",
+                            "url": "/entry/:entryKey/ecard/:ecardKey/runner/:runnerKey/eventClazz/:eventClazzKey",
                             "form": {
                                 "form": "RaceForm"
                             }

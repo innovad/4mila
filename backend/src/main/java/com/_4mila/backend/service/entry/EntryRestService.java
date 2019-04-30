@@ -37,11 +37,12 @@ public class EntryRestService extends AbstractCrudRestService<Entry, Long, Entry
 
 		// TODO should be a post or put service
 		// currently always creates a new entry
-		get("services/entry/:entryKey/runner/:runnerKey/eventClazz/:eventClazzKey", (req, res) -> {
+		get("services/entry/:entryKey/ecard/:ecardKey/runner/:runnerKey/eventClazz/:eventClazzKey", (req, res) -> {
+			Long ecardKey = Longs.tryParse(req.params("ecardKey"));
 			Long runnerKey = Longs.tryParse(req.params("runnerKey"));
 			Long eventClazzKey = Longs.tryParse(req.params("eventClazzKey"));
 
-			Race race = getCrudDatabaseService().createEntryWithRace(runnerKey, eventClazzKey);
+			Race race = getCrudDatabaseService().createEntryWithRace(ecardKey, runnerKey, eventClazzKey);
 			
 			List<Race> results = new ArrayList<>();
 			results.add(race);

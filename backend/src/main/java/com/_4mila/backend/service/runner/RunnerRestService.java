@@ -44,6 +44,12 @@ public class RunnerRestService extends AbstractCrudRestService<Runner, Long, Run
 			result.add(label);
 			return result;
 		}, getJsonTransformer());
+		
+		get("services/runner/withECard", (req, res) -> {
+			List<Runner> list = getCrudDatabaseService().list();
+			list.removeIf(e -> e.getDefaultEcard() == null);
+			return getDatabaseService().createPathList(list);
+		}, getJsonTransformer());
 	}
 
 }

@@ -47,5 +47,5 @@ public class EcardDatabaseService extends AbstractCrudDatabaseService<Ecard, Lon
 			addPredicate(criteriaQuery, cb.equal(cb.lower(root.get(Ecard_.id)), id));
 		}
 	}
-
+	
 }

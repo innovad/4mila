@@ -39,7 +39,7 @@ public class EntryDatabaseServiceTest extends AbstractCrudDatabaseServiceTest<En
 		eventClazz = getInjector().getInstance(EventClazzDatabaseService.class).create(eventClazz);
 		Runner runner = getInjector().getInstance(RunnerDatabaseService.class).create(new Runner());
 		EntryDatabaseService svc = getInjector().getInstance(EntryDatabaseService.class);
-		Race race = svc.createEntryWithRace(runner.getKey(), eventClazz.getKey());
+		Race race = svc.createEntryWithRace(null, runner.getKey(), eventClazz.getKey());
 		
 		assertNotNull("entry must exist", race.getEntry());
 		
@@ -54,19 +54,19 @@ public class EntryDatabaseServiceTest extends AbstractCrudDatabaseServiceTest<En
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewEntryNull1() throws Exception {
 		EntryDatabaseService svc = getInjector().getInstance(EntryDatabaseService.class);
-		svc.createEntryWithRace(null, null);
+		svc.createEntryWithRace(null, null, null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewEntryNull2() throws Exception {
 		EntryDatabaseService svc = getInjector().getInstance(EntryDatabaseService.class);
-		svc.createEntryWithRace(1L, null);
+		svc.createEntryWithRace(null, 1L, null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewEntryNull3() throws Exception {
 		EntryDatabaseService svc = getInjector().getInstance(EntryDatabaseService.class);
-		svc.createEntryWithRace(null, 1L);
+		svc.createEntryWithRace(null, null, 1L);
 	}
 
 }

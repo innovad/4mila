@@ -70,9 +70,7 @@ export class _4milaTranslationService extends TranslationService {
             "Sex": "Sex",
             "SortOrder": "Sort Order",
             "Status": "Status",
-            "TestDownload": "Download",
-            "TestEntryPersonDatabase": "Entry DB",
-            "TestEntryNewPerson": "Entry New",
+            "TestECard": "Simulate E-Card",
             "YearOfBirth": "Year of birth"
         };
     }

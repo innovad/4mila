@@ -149,6 +149,8 @@ public class TestDataService extends AbstractDatabaseService {
 
 		Ecard ecard1 = createTestECard("123456");
 		Ecard ecard2 = createTestECard("900004");
+		createTestECard("1151975");
+		createTestECard("770321");
 		
 		Runner runner1 = createTestRunner("Niggli-Luder", "Simone", ecard1);
 		Runner runner2 = createTestRunner("Hubmann", "Daniel", ecard2);
@@ -242,7 +244,7 @@ public class TestDataService extends AbstractDatabaseService {
 	}
 	
 	private Race createTestRace(Runner runner, EventClazz eventClazz) {
-		return entryDatabaseService.createEntryWithRace(runner.getKey(), eventClazz.getKey());
+		return entryDatabaseService.createEntryWithRace(null, runner.getKey(), eventClazz.getKey());
 	}
 	
 	private RaceControl createTestRaceControl(Race race, CourseControl courseControl, long sortOrder) {
