@@ -17,10 +17,12 @@ import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com._4mila.backend.model.ecard.Ecard;
 import com._4mila.backend.model.runner.Runner;
 import com._4mila.backend.model.runner.csv.RunnerImport;
 import com._4mila.backend.service.AbstractCrudRestService;
 import com._4mila.backend.service.PathListEntry;
+import com._4mila.backend.service.ecard.EcardDatabaseService;
 import com._4mila.backend.service.exception.BackendValidationException;
 import com._4mila.backend.service.runner.RunnerDatabaseService;
 import com.google.common.base.Strings;
@@ -34,6 +36,9 @@ public class RunnerImportRestService extends AbstractCrudRestService<RunnerImpor
 
 	@Inject
 	RunnerDatabaseService runnerDatabaseService;
+	
+	@Inject
+	EcardDatabaseService ecardDatabaseService;
 
 	@Inject
 	public RunnerImportRestService(Injector injector) {
@@ -66,6 +71,16 @@ public class RunnerImportRestService extends AbstractCrudRestService<RunnerImpor
 					}
 				}
 
+				// Get existing ecards
+				List<Ecard> existingECards = ecardDatabaseService.list();
+				HashMap<String, Ecard> existingECardLookup = new HashMap<>();
+				for (Ecard existingEcard : existingECards) {
+					if (!Strings.isNullOrEmpty(existingEcard.getId())) {
+						existingECardLookup.put(existingEcard.getId(), existingEcard);
+					}
+				}
+				
+				// TODO support other header languages
 				for (CSVRecord record : records) {
 					if (record.getRecordNumber() % 500 == 0) {
 						logger.info("Importing record " + record.getRecordNumber());
@@ -76,7 +91,17 @@ public class RunnerImportRestService extends AbstractCrudRestService<RunnerImpor
 						runner = new Runner();
 						runner.setId(id);
 					}
-					// TODO support other header languages
+					Ecard ecard = null;
+					String ecardId = record.get("Chipnr SI");
+					if (!Strings.isNullOrEmpty(ecardId)) {
+						ecard = existingECardLookup.get(ecardId);
+						if (ecard == null) {
+							ecard = new Ecard();
+							ecard.setId(ecardId);
+						}
+					}
+					runner.setDefaultEcard(ecard);
+					
 					if (record.isSet("Nachname")) {
 						runner.setFamilyName(record.get("Nachname"));
 					}
@@ -98,6 +123,15 @@ public class RunnerImportRestService extends AbstractCrudRestService<RunnerImpor
 							runner.setSex("m");
 						} else if ("F".equalsIgnoreCase(sex)) {
 							runner.setSex("f");
+						}
+					}
+					
+					// persist
+					if (ecard != null) {
+						if (ecard.getKey() == null) {
+							ecardDatabaseService.create(ecard);
+						} else {
+							ecardDatabaseService.update(ecard);
 						}
 					}
 					if (runner.getKey() == null) {
