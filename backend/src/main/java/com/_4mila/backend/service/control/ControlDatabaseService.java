@@ -2,6 +2,8 @@ package com._4mila.backend.service.control;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
@@ -26,6 +28,22 @@ public class ControlDatabaseService extends AbstractCrudDatabaseService<Control,
 	@Override
 	protected void orderBy(Root<Control> root, List<Order> orderList) {
 		orderList.add(getCriteriaBuilder().asc(root.get(Control_.id)));
+	}
+
+	public class EventFilter extends AbstractCrudDatabaseService<Control, Long>.AbstractListFilter {
+
+		private Long eventKey;
+
+		public EventFilter(Long eventKey) {
+			super();
+			this.eventKey = eventKey;
+		}
+
+		@Override
+		public void appendFilter(CriteriaQuery<Control> criteriaQuery, Root<Control> root) {
+			CriteriaBuilder cb = getCriteriaBuilder();
+			addPredicate(criteriaQuery, cb.equal(root.get(Control_.event), eventKey));
+		}
 	}
 
 }

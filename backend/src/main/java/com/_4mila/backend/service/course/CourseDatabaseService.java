@@ -2,6 +2,8 @@ package com._4mila.backend.service.course;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
@@ -31,6 +33,22 @@ public class CourseDatabaseService extends AbstractCrudDatabaseService<Course, L
 	@Override
 	protected void orderBy(Root<Course> root, List<Order> orderList) {
 		orderList.add(getCriteriaBuilder().asc(root.get(Course_.name)));
+	}
+
+	public class EventFilter extends AbstractCrudDatabaseService<Course, Long>.AbstractListFilter {
+
+		private Long eventKey;
+
+		public EventFilter(Long eventKey) {
+			super();
+			this.eventKey = eventKey;
+		}
+
+		@Override
+		public void appendFilter(CriteriaQuery<Course> criteriaQuery, Root<Course> root) {
+			CriteriaBuilder cb = getCriteriaBuilder();
+			addPredicate(criteriaQuery, cb.equal(root.get(Course_.event), eventKey));
+		}
 	}
 
 }

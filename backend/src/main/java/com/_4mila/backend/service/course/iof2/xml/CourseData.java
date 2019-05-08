@@ -40,11 +40,11 @@ public class CourseData {
     @XmlElement(name = "StartPoint")
     protected List<StartPoint> startPoint;
     @XmlElement(name = "Control")
-    protected List<Control> control;
+    protected List<XmlControl> control;
     @XmlElement(name = "FinishPoint")
     protected List<FinishPoint> finishPoint;
     @XmlElement(name = "Course")
-    protected List<Course> course;
+    protected List<XmlCourse> course;
 
     /**
      * Gets the value of the iofVersion property.
@@ -141,13 +141,13 @@ public class CourseData {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Control }
+     * {@link XmlControl }
      * 
      * 
      */
-    public List<Control> getControl() {
+    public List<XmlControl> getControl() {
         if (control == null) {
-            control = new ArrayList<Control>();
+            control = new ArrayList<XmlControl>();
         }
         return this.control;
     }
@@ -199,13 +199,13 @@ public class CourseData {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Course }
+     * {@link XmlCourse }
      * 
      * 
      */
-    public List<Course> getCourse() {
+    public List<XmlCourse> getCourse() {
         if (course == null) {
-            course = new ArrayList<Course>();
+            course = new ArrayList<XmlCourse>();
         }
         return this.course;
     }
