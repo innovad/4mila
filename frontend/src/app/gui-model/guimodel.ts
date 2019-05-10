@@ -436,6 +436,20 @@ export class GuiModel {
                             "width": 2
                         },
                         {
+                            "id": "length",
+                            "type": "text",
+                            "name": "Length",
+                            "required": false,
+                            "width": 1
+                        },
+                        {
+                            "id": "climb",
+                            "type": "text",
+                            "name": "Climb",
+                            "required": false,
+                            "width": 1
+                        },
+                        {
                             "id":   "event",
                             "type": "autocomplete",
                             "name": "Event",
