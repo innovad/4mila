@@ -24,7 +24,7 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 
 	@Inject
 	JsonHelper jsonHelper;
-		
+
 	private Class<ENTITY> entityClass;
 	private String jsonEntityName;
 
@@ -53,8 +53,12 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 
 	protected void initGet() {
 		get("services/" + jsonEntityName + "/:key", (req, res) -> {
-			KEYTYPE key = parseKey(req.params("key"));
-			return getDatabaseService().read(key);
+			KEYTYPE key = null;
+			if (req.params("key") != null && !req.params("key").equals("null")) {
+				key = parseKey(req.params("key"));
+				return getDatabaseService().read(key);
+			}
+			return getDatabaseService().prepare();
 		}, getJsonTransformer());
 	}
 
@@ -89,7 +93,7 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 					field.set(entity, field.get(original));
 				}
 			}
-			entityClass.getMethod("setKey", key.getClass()).invoke(entity, key); 
+			entityClass.getMethod("setKey", key.getClass()).invoke(entity, key);
 			return getDatabaseService().update(entity);
 		}, getJsonTransformer());
 	}
@@ -98,7 +102,7 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 		delete("services/" + jsonEntityName + "/:key", (req, res) -> {
 			KEYTYPE key = parseKey(req.params("key"));
 			ENTITY entity = getDatabaseService().read(key);
-			entityClass.getMethod("setKey", key.getClass()).invoke(entity, key); 
+			entityClass.getMethod("setKey", key.getClass()).invoke(entity, key);
 			boolean status = false;
 			try {
 				status = getDatabaseService().delete(entity);
@@ -117,7 +121,7 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 	public DATABASESERIVCE getCrudDatabaseService() {
 		return (DATABASESERIVCE) super.getDatabaseService();
 	}
-					
+
 	@SuppressWarnings("unchecked")
 	private KEYTYPE parseKey(String keyString) {
 		Object key = Longs.tryParse(keyString);
@@ -126,6 +130,5 @@ public abstract class AbstractCrudRestService<ENTITY, KEYTYPE, DATABASESERIVCE> 
 		}
 		return (KEYTYPE) key;
 	}
-	
 
 }

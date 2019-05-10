@@ -469,11 +469,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CourseControl }
+     * Create an instance of {@link XmlCourseControl }
      * 
      */
-    public CourseControl createCourseControl() {
-        return new CourseControl();
+    public XmlCourseControl createCourseControl() {
+        return new XmlCourseControl();
     }
 
     /**

@@ -4,6 +4,7 @@ import static spark.Spark.get;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeSet;
 
 import com._4mila.backend.model.control.Control;
 import com._4mila.backend.service.AbstractCrudRestService;
@@ -29,7 +30,7 @@ public class ControlRestService extends AbstractCrudRestService<Control, Long, C
 
 		get("services/event/:eventKey/control", (req, res) -> {
 			Long eventNr = Longs.tryParse(req.params("eventKey"));
-			return getDatabaseService().createPathList(eventDatabaseService.read(eventNr).getControls());
+			return getDatabaseService().createPathList(new TreeSet<>(eventDatabaseService.read(eventNr).getControls()));
 		}, getJsonTransformer());
 		
 		get("services/event/:eventKey/control/summary", (req, res) -> {

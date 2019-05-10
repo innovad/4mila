@@ -71,6 +71,7 @@ export class _4milaTranslationService extends TranslationService {
             "SortOrder": "Sort Order",
             "Status": "Status",
             "TestECard": "Simulate E-Card",
+            "Type": "Type",
             "YearOfBirth": "Year of birth"
         };
     }

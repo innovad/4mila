@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "mapTextPosition"
 })
 @XmlRootElement(name = "CourseControl")
-public class CourseControl {
+public class XmlCourseControl {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)

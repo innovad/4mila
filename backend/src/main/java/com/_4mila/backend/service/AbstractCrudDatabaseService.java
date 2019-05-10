@@ -48,6 +48,10 @@ public abstract class AbstractCrudDatabaseService<ENTITY, KEYTYPE> extends Abstr
 	protected void orderBy(Root<ENTITY> root, List<Order> orderList) {
 	}
 
+	protected ENTITY prepare() {
+		return null;
+	}
+	
 	protected void afterRead(ENTITY entity) {
 	}
 	

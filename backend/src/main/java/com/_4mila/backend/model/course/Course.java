@@ -18,6 +18,10 @@ import com._4mila.backend.model.event.Event;
 public class Course extends AbstractEntity implements Comparable<Course> {
 
 	private String name;
+	
+	private String climb;
+	
+	private String length;
 
 	@ManyToOne
 	private Event event;
@@ -50,6 +54,22 @@ public class Course extends AbstractEntity implements Comparable<Course> {
 	
 	public Set<EventClazz> getEventClasses() {
 		return eventClasses;
+	}
+	
+	public String getClimb() {
+		return climb;
+	}
+	
+	public void setClimb(String climb) {
+		this.climb = climb;
+	}
+	
+	public String getLength() {
+		return length;
+	}
+	
+	public void setLength(String length) {
+		this.length = length;
 	}
 
 	@Override

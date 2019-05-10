@@ -13,6 +13,7 @@ import com._4mila.backend.model.course.iof2.CourseImport;
 import com._4mila.backend.model.event.Event;
 import com._4mila.backend.service.AbstractCrudRestServiceTest;
 import com._4mila.backend.service.control.ControlDatabaseService;
+import com._4mila.backend.service.course.CourseControlDatabaseService;
 import com._4mila.backend.service.course.CourseDatabaseService;
 import com._4mila.backend.service.event.EventDatabaseService;
 
@@ -39,16 +40,21 @@ public class CourseImportRestServiceTest extends AbstractCrudRestServiceTest<Cou
 		ControlDatabaseService controlDatabaseService = getInjector().getInstance(ControlDatabaseService.class);
 		int initialControlCount = controlDatabaseService.list().size();
 		
+		CourseControlDatabaseService courseControlDatabaseService = getInjector().getInstance(CourseControlDatabaseService.class);
+		int initialCourseControlCount = courseControlDatabaseService.list().size();
+		
 		String url = "/upload/event/" + event.getKey() + "/course";
 		String jsonResult = testPost(url, "coursedata_iof2.xml");
 		assertNotNull("fileKey", jsonResult);
 		assertEquals(initialCourseCount + 4, courseDatabaseService.list().size());
-		assertEquals(initialControlCount + 26, controlDatabaseService.list().size());
+		assertEquals(initialControlCount + 28, controlDatabaseService.list().size());
+		assertEquals(initialCourseControlCount + 99, courseControlDatabaseService.list().size());
 		
 		jsonResult = testPost(url, "coursedata_iof2.xml");
 		assertNotNull("fileKey", jsonResult);
 		assertEquals(initialCourseCount + 4, courseDatabaseService.list().size());		
-		assertEquals(initialControlCount + 26, controlDatabaseService.list().size());
+		assertEquals(initialControlCount + 28, controlDatabaseService.list().size());
+		assertEquals(initialCourseControlCount + 99, courseControlDatabaseService.list().size());
 	}
 	
 	@BeforeClass
