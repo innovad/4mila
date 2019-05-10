@@ -55,7 +55,7 @@ public class CourseImportRestService extends AbstractCrudRestService<CourseImpor
 
 		post("services/upload/event/:eventKey/course", (req, res) -> {
 			Long eventKey = Longs.tryParse(req.params("eventKey"));
-			Event event = eventDatabaseService.read(eventKey); // TODO path should replace :eventKey in fileUpload Element
+			Event event = eventDatabaseService.read(eventKey); 
 			req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 			Part part = req.raw().getPart("upload");
 			try (InputStream is = part.getInputStream()) {
