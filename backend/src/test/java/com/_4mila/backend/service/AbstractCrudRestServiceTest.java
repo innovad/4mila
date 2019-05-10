@@ -6,8 +6,8 @@ import static spark.Spark.awaitStop;
 import static spark.Spark.port;
 import static spark.Spark.stop;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -103,12 +103,12 @@ public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYT
 		HttpPost postRequest = new HttpPost("http://localhost:" + port + "/services/" + serviceName);
 
 		if (resource != null) {
-			File file = new File(getClass().getClassLoader().getResource(resource).getFile());
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resource);
 
-			FileBody fileBody = new FileBody(file, ContentType.DEFAULT_BINARY);
+			InputStreamBody inputStreamBody = new InputStreamBody(inputStream, ContentType.DEFAULT_BINARY);
 			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-			builder.addPart("upload", fileBody);
+			builder.addPart("upload", inputStreamBody);
 			HttpEntity entity = builder.build();
 			postRequest.setEntity(entity);
 		}
