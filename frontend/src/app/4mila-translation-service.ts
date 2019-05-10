@@ -70,6 +70,7 @@ export class _4milaTranslationService extends TranslationService {
             "Runner": "Runner",
             "Runners": "Runners",
             "Sex": "Sex",
+            "SetCurrentEvent": "Set as current Event",
             "SortOrder": "Sort Order",
             "Status": "Status",
             "TestECard": "Simulate E-Card",

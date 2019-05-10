@@ -32,20 +32,20 @@ public class EventClazzRestService extends AbstractCrudRestService<EventClazz, L
 		super.initList();
 
 		get("services/event/:eventKey/eventClazz", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
-			if (eventNr == null) {
-				eventNr = settingsDatabaseService.getSettings().getDefaultEvent().getKey();
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
+			if (eventKey == null) {
+				eventKey = settingsDatabaseService.getSettings().getDefaultEvent().getKey();
 			}
-			return getDatabaseService().createPathList(eventDatabaseService.read(eventNr).getEventClasses());
+			return getDatabaseService().createPathList(eventDatabaseService.read(eventKey).getEventClasses());
 		}, getJsonTransformer());
 		
 		get("services/event/:eventKey/eventClazz/summary", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
 			Collection<PathListEntry<Long>> resultList = new ArrayList<>();
 			PathListEntry<Long> entry = new PathListEntry<>();
 			entry.setName("Classes"); // translation
-			entry.setKey(eventNr, "eventKey");
-			entry.getDetails().add("" + eventDatabaseService.read(eventNr).getEventClasses().size());
+			entry.setKey(eventKey, "eventKey");
+			entry.getDetails().add("" + eventDatabaseService.read(eventKey).getEventClasses().size());
 			resultList.add(entry);
 			return resultList;
 		}, getJsonTransformer());

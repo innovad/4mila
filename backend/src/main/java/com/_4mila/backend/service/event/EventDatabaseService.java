@@ -9,9 +9,14 @@ import com._4mila.backend.model.event.Event;
 import com._4mila.backend.model.event.Event_;
 import com._4mila.backend.service.AbstractCrudDatabaseService;
 import com._4mila.backend.service.PathListEntry;
+import com._4mila.backend.service.settings.SettingsDatabaseService;
+import com.google.inject.Inject;
 
 public class EventDatabaseService extends AbstractCrudDatabaseService<Event, Long> {
 
+	@Inject
+	SettingsDatabaseService settingsDatabaseService;
+	
 	@Override
 	public Class<Event> getEntityClass() {
 		return Event.class;
@@ -21,6 +26,11 @@ public class EventDatabaseService extends AbstractCrudDatabaseService<Event, Lon
 	public void createPathListEntry(Event entity, PathListEntry<Long> entry) {
 		entry.setKey(entity.getKey(), getKeyName());
 		entry.setName(entity.getName());
+		if (!entity.equals(settingsDatabaseService.getSettings().getDefaultEvent())) {
+			entry.setColor("silver");
+		} else {
+			entry.getDetails().add("Current event");
+		}
 	}
 
 	@Override

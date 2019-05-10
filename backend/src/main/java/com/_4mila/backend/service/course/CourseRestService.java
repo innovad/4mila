@@ -28,17 +28,17 @@ public class CourseRestService extends AbstractCrudRestService<Course, Long, Cou
 		super.initList();
 
 		get("services/event/:eventKey/course", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
-			return getDatabaseService().createPathList(eventDatabaseService.read(eventNr).getCourses());
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
+			return getDatabaseService().createPathList(eventDatabaseService.read(eventKey).getCourses());
 		}, getJsonTransformer());
 		
 		get("services/event/:eventKey/course/summary", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
 			Collection<PathListEntry<Long>> resultList = new ArrayList<>();
 			PathListEntry<Long> entry = new PathListEntry<>();
 			entry.setName("Courses"); // translation
-			entry.setKey(eventNr, "eventKey");
-			entry.getDetails().add("" + eventDatabaseService.read(eventNr).getCourses().size());
+			entry.setKey(eventKey, "eventKey");
+			entry.getDetails().add("" + eventDatabaseService.read(eventKey).getCourses().size());
 			resultList.add(entry);
 			return resultList;
 		}, getJsonTransformer());

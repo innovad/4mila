@@ -29,17 +29,17 @@ public class ControlRestService extends AbstractCrudRestService<Control, Long, C
 		super.initList();
 
 		get("services/event/:eventKey/control", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
-			return getDatabaseService().createPathList(new TreeSet<>(eventDatabaseService.read(eventNr).getControls()));
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
+			return getDatabaseService().createPathList(new TreeSet<>(eventDatabaseService.read(eventKey).getControls()));
 		}, getJsonTransformer());
 		
 		get("services/event/:eventKey/control/summary", (req, res) -> {
-			Long eventNr = Longs.tryParse(req.params("eventKey"));
+			Long eventKey = Longs.tryParse(req.params("eventKey"));
 			Collection<PathListEntry<Long>> resultList = new ArrayList<>();
 			PathListEntry<Long> entry = new PathListEntry<>();
 			entry.setName("Controls"); // translation
-			entry.setKey(eventNr, "eventKey");
-			entry.getDetails().add("" + eventDatabaseService.read(eventNr).getControls().size());
+			entry.setKey(eventKey, "eventKey");
+			entry.getDetails().add("" + eventDatabaseService.read(eventKey).getControls().size());
 			resultList.add(entry);
 			return resultList;
 		}, getJsonTransformer());

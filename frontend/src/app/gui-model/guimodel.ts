@@ -978,6 +978,15 @@ export class GuiModel {
                             }
                         },
                         {
+                            "type": "button",
+                            "name": "SetCurrentEvent",
+                            "width": 2,
+                            "icon": "fa-clock",
+                            "color": "green",
+                            "url": "/settings/event/:eventKey",
+                            "permissionUrl": "/settings/current/event/:eventKey"
+                        },
+                        {
                             "type": "list",
                             "name": "Courses",
                             "icon": "fa-map",
