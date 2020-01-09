@@ -14,6 +14,9 @@
 		<class>com._4mila.backend.model.race.Race</class>
 		<class>com._4mila.backend.model.race.RaceControl</class>
 		<class>com._4mila.backend.model.settings.Settings</class>
+		<class>com._4mila.backend.model.user.User</class>
+		<class>com._4mila.backend.model.user.permission.PermissionFunction</class>
+		<class>com._4mila.backend.model.user.permission.PermissionRole</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:assessmentTool;DB_CLOSE_DELAY=-1" />
