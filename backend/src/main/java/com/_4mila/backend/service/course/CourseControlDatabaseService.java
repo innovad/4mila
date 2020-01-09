@@ -9,9 +9,14 @@ import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.course.CourseControl_;
 import com._4mila.backend.service.AbstractCrudDatabaseService;
 import com._4mila.backend.service.PathListEntry;
+import com._4mila.backend.service.control.ControlDatabaseService;
+import com.google.inject.Inject;
 
 public class CourseControlDatabaseService extends AbstractCrudDatabaseService<CourseControl, Long> {
 
+	@Inject
+	ControlDatabaseService controlDatabaseService;
+	
 	@Override
 	public Class<CourseControl> getEntityClass() {
 		return CourseControl.class;
@@ -19,11 +24,11 @@ public class CourseControlDatabaseService extends AbstractCrudDatabaseService<Co
 
 	@Override
 	public void createPathListEntry(CourseControl entity, PathListEntry<Long> entry) {
-		entry.setKey(entity.getKey(), getKeyName());
-		if (entity.getControl() != null) {
-			entry.setName(entity.getControl().getId());
-		}
 		entry.getDetails().add(String.valueOf(entity.getSortOrder()));
+		if (entity.getControl() != null) {
+			controlDatabaseService.createPathListEntry(entity.getControl(), entry);
+		}
+		entry.setKey(entity.getKey(), getKeyName());
 	}
 
 	@Override

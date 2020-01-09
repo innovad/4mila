@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
     "modifyDate"
 })
 @XmlRootElement(name = "Control")
-public class Control {
+public class XmlControl {
 
     @XmlElement(name = "ControlCode", required = true)
     protected ControlCode controlCode;

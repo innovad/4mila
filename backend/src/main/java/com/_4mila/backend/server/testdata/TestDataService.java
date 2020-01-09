@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com._4mila.backend.model.clazz.Clazz;
 import com._4mila.backend.model.clazz.EventClazz;
 import com._4mila.backend.model.control.Control;
+import com._4mila.backend.model.control.ControlType;
 import com._4mila.backend.model.course.Course;
 import com._4mila.backend.model.course.CourseControl;
 import com._4mila.backend.model.ecard.Ecard;
@@ -100,17 +101,21 @@ public class TestDataService extends AbstractDatabaseService {
 		Event event1 = createTestEvent("Pfaffenholz-OL");
 		Event event2 = createTestEvent("Swiss Championships");
 
-		Control e1control31 = createTestControl(event1, "31");
-		Control e1control32 = createTestControl(event1, "32");
-		Control e1control33 = createTestControl(event1, "33");
-		Control e1control34 = createTestControl(event1, "34");
-		Control e1control35 = createTestControl(event1, "35");
+		Control e1start = createTestControl(event1, "S", ControlType.start);
+		Control e1control31 = createTestControl(event1, "31", ControlType.control);
+		Control e1control32 = createTestControl(event1, "32", ControlType.control);
+		Control e1control33 = createTestControl(event1, "33", ControlType.control);
+		Control e1control34 = createTestControl(event1, "34", ControlType.control);
+		Control e1control35 = createTestControl(event1, "35", ControlType.control);
+		Control e1finish = createTestControl(event1, "F", ControlType.finish);
 
-		Control e2control31 = createTestControl(event2, "31");
-		Control e2control99 = createTestControl(event2, "99");
-		Control e2control100 = createTestControl(event2, "100");
-		Control e2control101 = createTestControl(event2, "101");
-		Control e2control102 = createTestControl(event2, "102");
+		Control e2start = createTestControl(event2, "S", ControlType.start);
+		Control e2control31 = createTestControl(event2, "31", ControlType.control);
+		Control e2control99 = createTestControl(event2, "99", ControlType.control);
+		Control e2control100 = createTestControl(event2, "100", ControlType.control);
+		Control e2control101 = createTestControl(event2, "101", ControlType.control);
+		Control e2control102 = createTestControl(event2, "102", ControlType.control);
+		Control e2finish = createTestControl(event2, "F", ControlType.finish);
 		
 		Course courseA = createTestCourse(event1, "Course A");
 		Course courseB = createTestCourse(event1, "Course B");
@@ -131,21 +136,31 @@ public class TestDataService extends AbstractDatabaseService {
 		createTestEventClass(event2, h20, courseShort);
 		createTestEventClass(event2, d20, courseShort);
 		
-		createTestCourseControl(1, courseA, e1control31);
-		createTestCourseControl(2, courseA, e1control32);
-		createTestCourseControl(1, courseB, e1control31);
-		createTestCourseControl(1, courseC, e1control32);
-		createTestCourseControl(2, courseC, e1control33);
-		createTestCourseControl(3, courseC, e1control34);
-		createTestCourseControl(4, courseC, e1control35);
+		createTestCourseControl(1, courseA, e1start);
+		createTestCourseControl(2, courseA, e1control31);
+		createTestCourseControl(3, courseA, e1control32);
+		createTestCourseControl(4, courseA, e1finish);
+		createTestCourseControl(1, courseB, e1start);
+		createTestCourseControl(2, courseB, e1control31);
+		createTestCourseControl(3, courseB, e1finish);
+		createTestCourseControl(1, courseC, e1start);
+		createTestCourseControl(2, courseC, e1control32);
+		createTestCourseControl(3, courseC, e1control33);
+		createTestCourseControl(4, courseC, e1control34);
+		createTestCourseControl(5, courseC, e1control35);
+		createTestCourseControl(6, courseC, e1finish);
 
-		createTestCourseControl(1, courseShort, e2control31);
-		createTestCourseControl(1, courseShort, e2control99);
-		createTestCourseControl(1, courseShort, e2control100);
+		createTestCourseControl(1, courseShort, e2start);
+		createTestCourseControl(2, courseShort, e2control31);
+		createTestCourseControl(2, courseShort, e2control99);
+		createTestCourseControl(2, courseShort, e2control100);
+		createTestCourseControl(3, courseShort, e2finish);
 				
-		CourseControl courseControlCourseLong1 = createTestCourseControl(1, courseLong, e2control100);
-		CourseControl courseControlCourseLong2 = createTestCourseControl(2, courseLong, e2control101);
-		CourseControl courseControlCourseLong3 = createTestCourseControl(3, courseLong, e2control102);
+		createTestCourseControl(1, courseLong, e2start);
+		CourseControl courseControlCourseLong1 = createTestCourseControl(2, courseLong, e2control100);
+		CourseControl courseControlCourseLong2 = createTestCourseControl(3, courseLong, e2control101);
+		CourseControl courseControlCourseLong3 = createTestCourseControl(4, courseLong, e2control102);
+		createTestCourseControl(5, courseLong, e2finish);
 
 		Ecard ecard1 = createTestECard("123456");
 		Ecard ecard2 = createTestECard("900004");
@@ -186,10 +201,11 @@ public class TestDataService extends AbstractDatabaseService {
 		return event;
 	}
 
-	private Control createTestControl(Event event, String id) {
+	private Control createTestControl(Event event, String id, ControlType type) {
 		Control control = new Control();
 		control.setEvent(event);
 		control.setId(id);
+		control.setType(type);
 		controlDatabaseService.create(control);
 		return control;
 	}

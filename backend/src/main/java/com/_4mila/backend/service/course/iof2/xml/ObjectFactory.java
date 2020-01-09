@@ -469,11 +469,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CourseControl }
+     * Create an instance of {@link XmlCourseControl }
      * 
      */
-    public CourseControl createCourseControl() {
-        return new CourseControl();
+    public XmlCourseControl createCourseControl() {
+        return new XmlCourseControl();
     }
 
     /**
@@ -565,11 +565,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Control }
+     * Create an instance of {@link XmlControl }
      * 
      */
-    public Control createControl() {
-        return new Control();
+    public XmlControl createControl() {
+        return new XmlControl();
     }
 
     /**
@@ -893,11 +893,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Course }
+     * Create an instance of {@link XmlCourse }
      * 
      */
-    public Course createCourse() {
-        return new Course();
+    public XmlCourse createCourse() {
+        return new XmlCourse();
     }
 
     /**

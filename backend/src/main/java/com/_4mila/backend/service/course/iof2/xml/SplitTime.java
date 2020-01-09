@@ -38,7 +38,7 @@ public class SplitTime {
     protected String sequence;
     @XmlElements({
         @XmlElement(name = "ControlCode", type = ControlCode.class),
-        @XmlElement(name = "Control", type = Control.class)
+        @XmlElement(name = "Control", type = XmlControl.class)
     })
     protected List<Object> controlCodeOrControl;
     @XmlElement(name = "Time")
@@ -87,7 +87,7 @@ public class SplitTime {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ControlCode }
-     * {@link Control }
+     * {@link XmlControl }
      * 
      * 
      */

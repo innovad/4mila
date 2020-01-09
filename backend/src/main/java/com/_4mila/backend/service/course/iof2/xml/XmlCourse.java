@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
     "courseSectionList"
 })
 @XmlRootElement(name = "Course")
-public class Course {
+public class XmlCourse {
 
     @XmlElement(name = "CourseName", required = true)
     protected String courseName;

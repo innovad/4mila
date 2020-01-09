@@ -367,6 +367,7 @@ export class GuiModel {
                     "id": "ControlForm",
                     "title": "Control",
                     "url": "/control",
+                    "urlDefaults": true,
                     "formFieldList": [
                         {
                             "id": "id",
@@ -374,6 +375,27 @@ export class GuiModel {
                             "name": "Number",
                             "required": true,
                             "width": 2
+                        },
+                        {
+                            "id": "type",
+                            "type": "RadioGroupField",
+                            "name": "Type",
+                            "alignment": "horizontal",
+                            "width": 2,
+                            "radios": [{
+                                type: "radio",
+                                name: "Control",
+                                key: "control"
+                            }, {
+                                type: "radio",
+                                name: "Start",
+                                key: "start"
+                            }, {
+                                type: "radio",
+                                name: "Finish",
+                                key: "finish"
+                            }
+                            ]
                         },
                         {
                             "id":   "event",
@@ -412,6 +434,20 @@ export class GuiModel {
                             "name": "Name",
                             "required": true,
                             "width": 2
+                        },
+                        {
+                            "id": "length",
+                            "type": "text",
+                            "name": "Length",
+                            "required": false,
+                            "width": 1
+                        },
+                        {
+                            "id": "climb",
+                            "type": "text",
+                            "name": "Climb",
+                            "required": false,
+                            "width": 1
                         },
                         {
                             "id":   "event",
@@ -942,6 +978,15 @@ export class GuiModel {
                             }
                         },
                         {
+                            "type": "button",
+                            "name": "SetCurrentEvent",
+                            "width": 2,
+                            "icon": "fa-clock",
+                            "color": "green",
+                            "url": "/settings/event/:eventKey",
+                            "permissionUrl": "/settings/current/event/:eventKey"
+                        },
+                        {
                             "type": "list",
                             "name": "Courses",
                             "icon": "fa-map",
@@ -964,7 +1009,7 @@ export class GuiModel {
                         {
                             "type": "list",
                             "name": "Controls",
-                            "icon": "fa-map-pin",
+                            "icon": "fa-circle",
                             "color": "alizarin",
                             "search": false,
                             "url": "/event/:eventKey/control/summary",
@@ -983,7 +1028,7 @@ export class GuiModel {
                             "type": "newButton",
                             "name": "NewControl",
                             "width": 2,
-                            "icon": "fa-map-pin",
+                            "icon": "fa-circle",
                             "color": "green",
                             "form": {
                                 "form": "ControlForm"
@@ -991,7 +1036,7 @@ export class GuiModel {
                         },
                         {
                             "type": "list",
-                            "icon": "fa-map-pin",
+                            "icon": "fa-circle",
                             "color": "alizarin",
                             "search": false,
                             "url": "/event/:eventKey/control",
@@ -1057,7 +1102,7 @@ export class GuiModel {
                             "type": "newButton",
                             "name": "AddControl",
                             "width": 2,
-                            "icon": "fa-map-pin",
+                            "icon": "fa-circle",
                             "color": "green",
                             "form": {
                                 "form": "CourseControlForm"
@@ -1065,7 +1110,7 @@ export class GuiModel {
                         },
                         {
                             "type": "list",
-                            "icon": "fa-map-pin",
+                            "icon": "fa-circle",
                             "color": "alizarin",
                             "search": false,
                             "url": "/course/:courseKey/courseControl",

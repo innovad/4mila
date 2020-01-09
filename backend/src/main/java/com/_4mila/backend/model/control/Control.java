@@ -1,6 +1,8 @@
 package com._4mila.backend.model.control;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -16,6 +18,9 @@ public class Control extends AbstractEntity implements Comparable<Control> {
 
 	@ManyToOne
 	private Event event;
+	
+	@Enumerated(EnumType.STRING)
+	private ControlType type;
 
 	public String getId() {
 		return id;
@@ -32,12 +37,22 @@ public class Control extends AbstractEntity implements Comparable<Control> {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
+	
+	public ControlType getType() {
+		return type;
+	}
+	
+	public void setType(ControlType type) {
+		this.type = type;
+	}
 
 	@Override
 	public int compareTo(Control o) {
-		int nameComparison = this.getId().compareTo(o.getId());
-		if (nameComparison != 0) {
-			return nameComparison;
+		if (this.getId() != null && o.getId() != null) {
+			int nameComparison = this.getId().compareTo(o.getId());
+			if (nameComparison != 0) {
+				return nameComparison;
+			}
 		}
 		return this.getKey().compareTo(o.getKey());
 	}

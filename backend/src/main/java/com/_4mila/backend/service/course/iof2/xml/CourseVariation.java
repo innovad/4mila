@@ -60,7 +60,7 @@ public class CourseVariation {
     @XmlElement(name = "FinishChute")
     protected String finishChute;
     @XmlElement(name = "CourseControl", required = true)
-    protected List<CourseControl> courseControl;
+    protected List<XmlCourseControl> courseControl;
     @XmlElements({
         @XmlElement(name = "FinishPointCode", type = FinishPointCode.class),
         @XmlElement(name = "FinishPoint", type = FinishPoint.class)
@@ -263,13 +263,13 @@ public class CourseVariation {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CourseControl }
+     * {@link XmlCourseControl }
      * 
      * 
      */
-    public List<CourseControl> getCourseControl() {
+    public List<XmlCourseControl> getCourseControl() {
         if (courseControl == null) {
-            courseControl = new ArrayList<CourseControl>();
+            courseControl = new ArrayList<XmlCourseControl>();
         }
         return this.courseControl;
     }
