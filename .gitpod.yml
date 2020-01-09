@@ -1,8 +1,10 @@
-image: openjdk:11.0.2-jdk
+image: gitpod/workspace-full
 tasks:
   - init: cd frontend; npm install; cd ../backend; ./gradlew build
-    command: npm run start
+    command: npm run start; ./gradlew run
 ports:
   - port: 4567
   - port: 8080
+  - port: 9998
+  - port: 9999
     onOpen: open-preview
