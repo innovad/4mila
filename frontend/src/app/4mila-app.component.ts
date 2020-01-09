@@ -70,12 +70,15 @@ export class _4milaAppComponent extends PathAppComponent {
     public getBackendUrl() {
         if (window.location.hostname.indexOf("localhost") !== -1) {
             return "http://localhost:4567/services";
+        } else if (window.location.hostname.indexOf("127.0.0.1") !== -1) {
+            return "http://127.0.0.1:4567/services";
+        } else if (window.location.hostname.indexOf("gitpod.io") !== -1) {
+            let gitpodUrl = window.location.href;
+            gitpodUrl = gitpodUrl.replace("https://4200", "https://4567");
+            return gitpodUrl + "services";
         }
         let url: string = window.location.href;
         url = url.replace("/#", "");
-        if (url.indexOf("?") > 0) {
-            url = url.substring(0, url.indexOf("?"));
-        }
         if (url.endsWith("/")) {
             return url + "services";
         }
