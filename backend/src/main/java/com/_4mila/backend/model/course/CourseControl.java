@@ -46,7 +46,7 @@ public class CourseControl extends AbstractEntity implements Comparable<CourseCo
 
 	@Override
 	public int compareTo(CourseControl o) {
-		int sortOrderComparison = new Long(this.sortOrder).compareTo(o.sortOrder);
+		int sortOrderComparison = Long.valueOf(this.sortOrder).compareTo(o.sortOrder);
 		if (sortOrderComparison != 0) {
 			return sortOrderComparison;
 		}

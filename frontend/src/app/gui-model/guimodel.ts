@@ -639,7 +639,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Welcome! Please insert your E-Card to register or download!</h3>",
+                            "value": "<h4>Welcome! Please insert your E-Card to register or download!</h4>",
                             "newRow": true
                         },
                         {
@@ -651,7 +651,7 @@ export class GuiModel {
                         },
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Browse entries or results:</h3>",
+                            "value": "<h4>Browse entries or results:</h4>",
                             "newRow": true
                         },
                         {
@@ -672,7 +672,7 @@ export class GuiModel {
                         },
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Admin and Test features</h3>",
+                            "value": "<h4>Admin and Test features</h4>",
                             "newRow": true
                         },
                         {
@@ -698,7 +698,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>ECard without runner:</h3>"
+                            "value": "<h4>ECard without runner:</h4>"
                         },
                         {
                             "type": "list",
@@ -711,7 +711,7 @@ export class GuiModel {
                         },
                         {
                             "type": "pageLabel",
-                            "value": "<h3>ECard with runner:</h3>",
+                            "value": "<h4>ECard with runner:</h4>",
                             "newRow": true,
                         },
                         {
@@ -729,7 +729,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Thank you Mr. XY! Your results have been downloaded:</h3>"
+                            "value": "<h4>Thank you Mr. XY! Your results have been downloaded:</h4>"
                         },
                         {
                             "type": "backbutton",
@@ -762,7 +762,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Unknown E-Card. Please search the runner database:</h3>"
+                            "value": "<h4>Unknown E-Card. Please search the runner database:</h4>"
                         },
                         {
                             "type": "backbutton",
@@ -780,7 +780,7 @@ export class GuiModel {
                         },
                         {
                             "type": "pageLabel",
-                            "value": "<h3>If you cannot find yourself, please create a new runner</h3>",
+                            "value": "<h4>If you cannot find yourself, please create a new runner</h4>",
                             "newRow": true,
                         },
                         {
@@ -820,7 +820,7 @@ export class GuiModel {
                     "elementList": [
                         {
                             "type": "pageLabel",
-                            "value": "<h3>Your entry is confirmed.</h3>"
+                            "value": "<h4>Your entry is confirmed.</h4>"
                         },
                         {
                             "type": "list",

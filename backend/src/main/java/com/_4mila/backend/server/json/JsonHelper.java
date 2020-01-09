@@ -3,7 +3,6 @@ package com._4mila.backend.server.json;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +32,10 @@ import com.google.inject.Singleton;
 @Singleton
 public class JsonHelper {
 
-	private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateConverter()).registerTypeAdapter(Key.class, new PathListEntryKeyAdapter()).enableComplexMapKeySerialization().setExclusionStrategies(new JsonAnnotationExclusionStrategy(), new JsonOneToManyExclusionStrategy()).addDeserializationExclusionStrategy(new JsonManyToOneAndOneToOneDeserializationExclusionStrategy()).create();
+	private final Gson gson = new GsonBuilder().registerTypeAdapter(Key.class, new PathListEntryKeyAdapter()).enableComplexMapKeySerialization().setExclusionStrategies(new JsonAnnotationExclusionStrategy(), new JsonOneToManyExclusionStrategy()).addDeserializationExclusionStrategy(new JsonManyToOneAndOneToOneDeserializationExclusionStrategy()).setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	private final JsonTransformer jsonTransformer = new JsonTransformer(gson);
 	private static final Logger logger = LoggerFactory.getLogger(JsonHelper.class);
-	
+
 	@Inject
 	Injector injector;
 
@@ -65,8 +64,7 @@ public class JsonHelper {
 					}
 
 					// parse foreign key value
-					JsonParser parser = new JsonParser();
-					JsonObject obj = parser.parse(json).getAsJsonObject();
+					JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
 					JsonElement jsonElement = obj.get(field.getName());
 					Object fieldValue = null;
 					if (jsonElement != null && !(jsonElement instanceof JsonNull)) {
@@ -118,7 +116,7 @@ public class JsonHelper {
 		}
 		return object;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Object parseEnum(Field enumField, String value) {
 		Object fieldValue;
