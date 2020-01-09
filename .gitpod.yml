@@ -1,7 +1,8 @@
 image: gitpod/workspace-full
 tasks:
   - init: cd frontend; npm install; cd ../backend; ./gradlew build
-    command: cd ../frontend; npm run start; cd ../backend; ./gradlew run
+  - command: cd frontend; npm run start 
+  - command: cd backend; ./gradlew run
 ports:
   - port: 4567
   - port: 8080
