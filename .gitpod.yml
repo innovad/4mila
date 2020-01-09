@@ -1,0 +1,8 @@
+image: openjdk:11.0.2-jdk
+tasks:
+  - init: cd frontend; npm install; cd ../backend; ./gradlew build
+    command: npm run start
+ports:
+  - port: 4567
+  - port: 8080
+    onOpen: open-preview
